@@ -1,4 +1,4 @@
-import { Hero } from '@/components/Hero';
+import Hero from '@/components/Hero';
 import { FeaturedDesserts } from '@/components/FeaturedDesserts';
 import { Link } from 'react-router-dom';
 import { LuxuryButton } from '@/components/LuxuryButton';

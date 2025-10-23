@@ -34,11 +34,11 @@ const Contact = () => {
               <Phone className="h-8 w-8 text-primary" />
             </div>
             <h3 className="text-xl font-semibold text-foreground mb-2">Phone</h3>
-            <p className="text-muted-foreground">99127455</p>
+            <p className="text-muted-foreground">(+357) 99127455</p>
           </motion.a>
 
           <motion.a
-            href="https://www.instagram.com/ingridbakes.cy"
+            href="https://www.instagram.com/ingridbakes.cy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ const Contact = () => {
               Call Now
             </a>
             <a
-              href="https://www.instagram.com/ingridbakes.cy"
+              href="https://www.instagram.com/ingridbakes.cy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-card text-foreground rounded-xl font-semibold hover:bg-background transition-colors border border-primary"

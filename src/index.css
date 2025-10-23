@@ -8,59 +8,50 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* INGRID BAKES Design System - All colors in HSL */
+    /* INGRID BAKES - Luxurious navy, creme, and gold palette */
     
-    /* Backgrounds - Navy blue with white */
-    --background: 0 0% 100%; /* Pure white */
-    --background-secondary: 220 20% 97%; /* Very light navy tint */
-    --foreground: 220 40% 15%; /* Deep navy blue */
-
-    /* Cards */
-    --card: 0 0% 100%; /* white */
-    --card-foreground: 220 40% 15%;
-
-    /* Popover */
+    /* Backgrounds */
+    --background: 40 67% 98%; /* Rich creme #FAF3E0 */
+    --background-secondary: 223 57% 15%; /* Deep navy #0E1E3A */
+    --foreground: 223 57% 15%; /* Deep navy for text */
+    
+    --card: 0 0% 100%; /* Pure white for cards */
+    --card-foreground: 223 57% 15%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 220 40% 15%;
-
-    /* Primary - Metallic Gold accent */
-    --primary: 45 80% 58%; /* Rich metallic gold #D4AF37 */
-    --primary-foreground: 220 40% 15%; /* Navy text on gold */
-    --primary-hover: 45 80% 50%; /* Darker gold on hover */
-
-    /* Secondary - Navy blue */
-    --secondary: 220 40% 20%; /* Deep navy */
-    --secondary-foreground: 0 0% 100%;
-
-    /* Muted text */
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 15% 45%;
-
-    /* Accent - Gold */
-    --accent: 45 80% 58%;
-    --accent-foreground: 220 40% 15%;
-
-    /* Destructive */
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Borders */
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 45 80% 58%;
-
-    /* Border radius */
-    --radius: 0.5rem;
-
-    /* Custom design tokens */
-    --gradient-navy: linear-gradient(135deg, hsl(220, 40%, 15%), hsl(220, 40%, 25%));
-    --gradient-gold: linear-gradient(135deg, hsl(45, 80%, 58%), hsl(45, 80%, 65%));
-    --shadow-subtle: 0 1px 3px 0 rgba(28, 39, 60, 0.08);
-    --shadow-card: 0 4px 6px -1px rgba(28, 39, 60, 0.1), 0 2px 4px -1px rgba(28, 39, 60, 0.06);
-    --shadow-lift: 0 10px 15px -3px rgba(28, 39, 60, 0.15), 0 4px 6px -2px rgba(28, 39, 60, 0.08);
-    --shadow-gold: 0 4px 12px 0 rgba(212, 175, 55, 0.3);
+    --popover-foreground: 223 57% 15%;
     
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Primary - Real metallic gold */
+    --primary: 43 74% 53%; /* #D4AF37 true gold */
+    --primary-foreground: 223 57% 15%;
+    --primary-hover: 43 74% 48%;
+    
+    /* Secondary - Navy */
+    --secondary: 223 57% 15%;
+    --secondary-foreground: 40 67% 98%;
+    
+    --muted: 40 40% 92%;
+    --muted-foreground: 223 20% 45%;
+    
+    --accent: 43 74% 53%;
+    --accent-foreground: 223 57% 15%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 43 50% 75%;
+    --input: 43 30% 85%;
+    --ring: 43 74% 53%;
+    
+    --radius: 0.75rem;
+    
+    /* Luxury shadows with gold and navy tints */
+    --shadow-subtle: 0 1px 3px rgba(212, 175, 55, 0.08);
+    --shadow-card: 0 4px 16px rgba(14, 30, 58, 0.1), 0 0 0 1px rgba(212, 175, 55, 0.12);
+    --shadow-lift: 0 8px 32px rgba(14, 30, 58, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(212, 175, 55, 0.2);
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -73,27 +64,41 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 220 40% 12%;
-    --background-secondary: 220 40% 15%;
-    --foreground: 0 0% 98%;
-    --card: 220 40% 15%;
-    --card-foreground: 0 0% 98%;
-    --popover: 220 40% 15%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 45 80% 58%;
-    --primary-foreground: 220 40% 15%;
-    --primary-hover: 45 80% 65%;
-    --secondary: 220 40% 25%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 220 15% 20%;
-    --muted-foreground: 220 15% 65%;
-    --accent: 45 80% 58%;
-    --accent-foreground: 220 40% 15%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 220 20% 25%;
-    --input: 220 20% 25%;
-    --ring: 45 80% 58%;
+    --background: 223 57% 8%;
+    --background-secondary: 223 57% 15%;
+    --foreground: 40 67% 98%;
+    
+    --card: 223 57% 10%;
+    --card-foreground: 40 67% 98%;
+    
+    --popover: 223 57% 10%;
+    --popover-foreground: 40 67% 98%;
+    
+    --primary: 43 74% 53%;
+    --primary-foreground: 223 57% 15%;
+    --primary-hover: 43 74% 58%;
+    
+    --secondary: 223 57% 15%;
+    --secondary-foreground: 40 67% 98%;
+    
+    --muted: 223 30% 20%;
+    --muted-foreground: 40 30% 70%;
+    
+    --accent: 43 74% 53%;
+    --accent-foreground: 223 57% 15%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 43 30% 30%;
+    --input: 223 30% 20%;
+    --ring: 43 74% 53%;
+    
+    --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(212, 175, 55, 0.2);
+    --shadow-lift: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.25);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.5), 0 8px 32px rgba(212, 175, 55, 0.3);
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -145,5 +150,74 @@ All colors MUST be HSL.
   
   .font-body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Fade-in animation for sections */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Gold shimmer effect */
+  @keyframes goldShimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-hover)) 25%,
+      hsl(43 90% 65%) 50%,
+      hsl(var(--primary-hover)) 75%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 2000px 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShimmer 3s linear infinite;
+  }
+
+  /* Horizontal scroll container */
+  .horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+  }
+
+  .horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 4px;
+  }
+
+  .horizontal-scroll::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-hover));
   }
 }

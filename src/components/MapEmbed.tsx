@@ -1,18 +1,15 @@
 export const MapEmbed = () => {
-  // Nicosia, Cyprus coordinates
-  const mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52448.98034990764!2d33.31972842089844!3d35.17531110000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1767ca494d55%3A0x324c3d38c2b4d636!2sNicosia%2C%20Cyprus!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s";
-
   return (
-    <div className="w-full h-[400px] rounded-xl overflow-hidden shadow-card">
+    <div className="w-full h-[450px] rounded-xl overflow-hidden shadow-card border-2 border-primary/20">
       <iframe
-        src={mapUrl}
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1003.3581239615066!2d33.3646088!3d35.1638471!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1746f17d0bf9%3A0x373b858d942767f6!2sIngrid%20Bakes!5e1!3m2!1sen!2s!4v1761236475693!5m2!1sen!2s"
         width="100%"
         height="100%"
         style={{ border: 0 }}
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="INGRID BAKES Location in Cyprus"
+        title="Ingrid Bakes Location in Cyprus"
       />
     </div>
   );

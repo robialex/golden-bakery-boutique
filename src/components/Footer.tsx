@@ -61,13 +61,13 @@ export const Footer = () => {
               <li className="flex items-center text-secondary-foreground/80 text-sm">
                 <Phone className="h-4 w-4 mr-2 flex-shrink-0 text-primary" />
                 <a href="tel:+35799127455" className="hover:text-primary transition-colors">
-                  99127455
+                  (+357) 99127455
                 </a>
               </li>
               <li className="flex items-center text-secondary-foreground/80 text-sm">
                 <Instagram className="h-4 w-4 mr-2 flex-shrink-0 text-primary" />
                 <a 
-                  href="https://www.instagram.com/ingridbakes.cy"
+                  href="https://www.instagram.com/ingridbakes.cy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
                   target="_blank"
                   rel="noopener noreferrer" 
                   className="hover:text-primary transition-colors"
