@@ -7,11 +7,12 @@ interface ProductCardProps {
   name: string;
   description: string;
   price: number;
+  unit?: string;
   image: string;
   onAddToCart: () => void;
 }
 
-export const ProductCard = ({ name, description, price, image, onAddToCart }: ProductCardProps) => {
+export const ProductCard = ({ name, description, price, unit, image, onAddToCart }: ProductCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -43,18 +44,23 @@ export const ProductCard = ({ name, description, price, image, onAddToCart }: Pr
 
         {/* Price & Button */}
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-display font-bold text-primary">
-            €{price.toFixed(2)}
-          </span>
-          <LuxuryButton
-            size="sm"
-            onClick={onAddToCart}
-            className="group-hover:scale-105"
-            aria-label={`Add ${name} to cart`}
-          >
-            <Plus className="h-4 w-4 mr-1" />
-            Add to Cart
-          </LuxuryButton>
+          <div>
+            <span className="text-2xl font-display font-bold text-primary">
+              {price > 0 ? `€${price.toFixed(2)}` : 'Call for Price'}
+            </span>
+            {unit && <p className="text-xs text-muted-foreground">{unit}</p>}
+          </div>
+          {price > 0 && (
+            <LuxuryButton
+              size="sm"
+              onClick={onAddToCart}
+              className="group-hover:scale-105"
+              aria-label={`Add ${name} to cart`}
+            >
+              <Plus className="h-4 w-4 mr-1" />
+              Add to Cart
+            </LuxuryButton>
+          )}
         </div>
       </div>
     </motion.div>

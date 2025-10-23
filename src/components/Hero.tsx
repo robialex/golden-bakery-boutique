@@ -14,7 +14,7 @@ export const Hero = () => {
           className="w-full h-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/60 via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-secondary/80 via-secondary/60 to-transparent" />
       </div>
 
       {/* Content */}
@@ -24,37 +24,31 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-foreground mb-6 leading-tight">
-            Artisan Elegance<br />
-            <span className="text-primary">Crafted with Love</span>
+          <h1 className="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]">
+              INGRID BAKES
+            </span>
           </h1>
           
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-lg md:text-xl text-foreground/90 mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-foreground mb-8 max-w-2xl mx-auto font-light tracking-wide"
           >
-            Discover the finest handcrafted desserts and pastries in Nicosia. 
-            Each creation is a masterpiece of flavor and beauty.
+            Handcrafted Cakes & Desserts in Cyprus
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Link to="/menu">
-              <LuxuryButton size="lg">
-                View Our Menu
+            <a href="#menu">
+              <LuxuryButton size="lg" className="shadow-gold">
+                View Menu
               </LuxuryButton>
-            </Link>
-            <Link to="/contact">
-              <LuxuryButton variant="ghost" size="lg">
-                Contact Us
-              </LuxuryButton>
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </div>

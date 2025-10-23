@@ -8,55 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Luxury Bakery Design System - All colors in HSL */
+    /* INGRID BAKES Design System - All colors in HSL */
     
-    /* Backgrounds - Warm cream gradient */
-    --background: 47 100% 96%; /* #FFF9E7 */
-    --background-secondary: 45 67% 91%; /* #F8EFD4 */
-    --foreground: 0 0% 18%; /* #2D2D2D - rich deep gray */
+    /* Backgrounds - Navy blue with white */
+    --background: 0 0% 100%; /* Pure white */
+    --background-secondary: 220 20% 97%; /* Very light navy tint */
+    --foreground: 220 40% 15%; /* Deep navy blue */
 
     /* Cards */
     --card: 0 0% 100%; /* white */
-    --card-foreground: 0 0% 18%;
+    --card-foreground: 220 40% 15%;
 
     /* Popover */
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 18%;
+    --popover-foreground: 220 40% 15%;
 
-    /* Primary - Gold accent */
-    --primary: 43 55% 49%; /* #C6A136 */
-    --primary-foreground: 0 0% 100%; /* white text on gold */
-    --primary-hover: 43 55% 42%; /* darker gold on hover */
+    /* Primary - Metallic Gold accent */
+    --primary: 45 80% 58%; /* Rich metallic gold #D4AF37 */
+    --primary-foreground: 220 40% 15%; /* Navy text on gold */
+    --primary-hover: 45 80% 50%; /* Darker gold on hover */
 
-    /* Secondary - Pastel pink accent */
-    --secondary: 20 32% 87%; /* #EAD6CD */
-    --secondary-foreground: 0 0% 18%;
+    /* Secondary - Navy blue */
+    --secondary: 220 40% 20%; /* Deep navy */
+    --secondary-foreground: 0 0% 100%;
 
     /* Muted text */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 42%; /* #6B6B6B */
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 15% 45%;
 
-    /* Accent */
-    --accent: 43 55% 49%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Gold */
+    --accent: 45 80% 58%;
+    --accent-foreground: 220 40% 15%;
 
     /* Destructive */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
     /* Borders */
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 43 55% 49%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 45 80% 58%;
 
     /* Border radius */
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     /* Custom design tokens */
-    --gradient-warm: linear-gradient(135deg, hsl(47, 100%, 96%), hsl(45, 67%, 91%));
-    --shadow-subtle: 0 1px 3px 0 rgba(16, 18, 20, 0.04);
-    --shadow-card: 0 4px 6px -1px rgba(16, 18, 20, 0.06), 0 2px 4px -1px rgba(16, 18, 20, 0.03);
-    --shadow-lift: 0 10px 15px -3px rgba(16, 18, 20, 0.08), 0 4px 6px -2px rgba(16, 18, 20, 0.04);
+    --gradient-navy: linear-gradient(135deg, hsl(220, 40%, 15%), hsl(220, 40%, 25%));
+    --gradient-gold: linear-gradient(135deg, hsl(45, 80%, 58%), hsl(45, 80%, 65%));
+    --shadow-subtle: 0 1px 3px 0 rgba(28, 39, 60, 0.08);
+    --shadow-card: 0 4px 6px -1px rgba(28, 39, 60, 0.1), 0 2px 4px -1px rgba(28, 39, 60, 0.06);
+    --shadow-lift: 0 10px 15px -3px rgba(28, 39, 60, 0.15), 0 4px 6px -2px rgba(28, 39, 60, 0.08);
+    --shadow-gold: 0 4px 12px 0 rgba(212, 175, 55, 0.3);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -71,27 +73,27 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 0 0% 18%;
-    --background-secondary: 0 0% 15%;
+    --background: 220 40% 12%;
+    --background-secondary: 220 40% 15%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 15%;
+    --card: 220 40% 15%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 15%;
+    --popover: 220 40% 15%;
     --popover-foreground: 0 0% 98%;
-    --primary: 43 55% 49%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 43 55% 55%;
-    --secondary: 20 32% 30%;
+    --primary: 45 80% 58%;
+    --primary-foreground: 220 40% 15%;
+    --primary-hover: 45 80% 65%;
+    --secondary: 220 40% 25%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 43 55% 49%;
-    --accent-foreground: 0 0% 100%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 15% 65%;
+    --accent: 45 80% 58%;
+    --accent-foreground: 220 40% 15%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 25%;
-    --input: 0 0% 25%;
-    --ring: 43 55% 49%;
+    --border: 220 20% 25%;
+    --input: 220 20% 25%;
+    --ring: 45 80% 58%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -109,7 +111,7 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-gradient-to-br from-background to-background-secondary text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 

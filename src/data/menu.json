@@ -1,101 +1,17 @@
 {
-  "categories": ["All", "Cakes", "Pastries", "Macarons", "Desserts"],
+  "categories": ["All", "Honey Cakes", "Mousse Cakes", "Sponge Cakes", "Cheesecakes", "Other Cakes", "Gelato", "Individual Desserts", "Mini Sweets", "Savory Treats"],
   "products": [
-    {
-      "id": "1",
-      "name": "Opera Cake",
-      "category": "Cakes",
-      "description": "Layers of almond sponge soaked in coffee syrup, with ganache and coffee buttercream",
-      "price": 45.00,
-      "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "2",
-      "name": "Raspberry Tart",
-      "category": "Pastries",
-      "description": "Buttery tart shell filled with vanilla custard and topped with fresh raspberries",
-      "price": 28.00,
-      "image": "https://images.unsplash.com/photo-1519915212116-7cfef71f1d3e?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "3",
-      "name": "French Macarons Box",
-      "category": "Macarons",
-      "description": "Assortment of 12 handcrafted macarons in classic flavors",
-      "price": 36.00,
-      "image": "https://images.unsplash.com/photo-1558312657-d1d9a31a6c4e?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "4",
-      "name": "Chocolate Éclair",
-      "category": "Pastries",
-      "description": "Classic French pastry filled with vanilla cream and topped with rich chocolate glaze",
-      "price": 18.00,
-      "image": "https://images.unsplash.com/photo-1612201142855-c7e41f8e2f40?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "5",
-      "name": "Pistachio Croissant",
-      "category": "Pastries",
-      "description": "Flaky croissant filled with pistachio cream and topped with crushed pistachios",
-      "price": 22.00,
-      "image": "https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "6",
-      "name": "Lemon Meringue Tart",
-      "category": "Desserts",
-      "description": "Tangy lemon curd topped with torched Italian meringue on a sweet pastry base",
-      "price": 32.00,
-      "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "7",
-      "name": "Red Velvet Cake",
-      "category": "Cakes",
-      "description": "Classic red velvet cake with cream cheese frosting and white chocolate shavings",
-      "price": 48.00,
-      "image": "https://images.unsplash.com/photo-1586788680434-30d324b2d46f?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "8",
-      "name": "Tiramisu",
-      "category": "Desserts",
-      "description": "Traditional Italian dessert with espresso-soaked ladyfingers and mascarpone cream",
-      "price": 26.00,
-      "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "9",
-      "name": "Vanilla Bean Macaron",
-      "category": "Macarons",
-      "description": "Delicate macaron shells filled with Madagascar vanilla bean buttercream",
-      "price": 3.50,
-      "image": "https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "10",
-      "name": "Chocolate Fondant",
-      "category": "Cakes",
-      "description": "Decadent chocolate cake with a molten center, served with vanilla ice cream",
-      "price": 35.00,
-      "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "11",
-      "name": "Strawberry Shortcake",
-      "category": "Cakes",
-      "description": "Light sponge cake layered with fresh strawberries and whipped cream",
-      "price": 38.00,
-      "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&h=500&fit=crop"
-    },
-    {
-      "id": "12",
-      "name": "Pistachio Macaron",
-      "category": "Macarons",
-      "description": "Pistachio-flavored shells with pistachio cream filling",
-      "price": 3.50,
-      "image": "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=500&h=500&fit=crop"
-    }
+    {"id": "h1", "name": "Classic Honey Cake", "category": "Honey Cakes", "description": "Traditional honey cake with layers of soft sponge", "price": 30.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=500&h=500&fit=crop"},
+    {"id": "h2", "name": "Chocolate Cherry Honey Cake", "category": "Honey Cakes", "description": "Rich chocolate honey cake with cherry filling", "price": 30.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?w=500&h=500&fit=crop"},
+    {"id": "h3", "name": "Chocolate Caramel Honey Cake", "category": "Honey Cakes", "description": "Chocolate honey cake with salted caramel", "price": 32.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop"},
+    {"id": "h8", "name": "Pistachio Cherry Honey Cake", "category": "Honey Cakes", "description": "Premium pistachio honey cake", "price": 35.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=500&h=500&fit=crop"},
+    {"id": "m1", "name": "Mandarin Vanilla Mousse", "category": "Mousse Cakes", "description": "Light mandarin mousse with vanilla", "price": 32.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=500&h=500&fit=crop"},
+    {"id": "m5", "name": "Truffle Cake", "category": "Mousse Cakes", "description": "Rich chocolate truffle mousse", "price": 34.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop"},
+    {"id": "s4", "name": "Brownie Cake", "category": "Sponge Cakes", "description": "Chocolate, cream cheese, and pecans", "price": 32.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=500&h=500&fit=crop"},
+    {"id": "c1", "name": "Baklava Cheesecake", "category": "Cheesecakes", "description": "Middle Eastern baklava meets cheesecake", "price": 32.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=500&h=500&fit=crop"},
+    {"id": "o11", "name": "Tiramisu", "category": "Other Cakes", "description": "Classic Italian coffee dessert", "price": 30.00, "unit": "per kg", "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=500&h=500&fit=crop"},
+    {"id": "g1", "name": "Pistachio Gelato", "category": "Gelato", "description": "Creamy pistachio gelato", "price": 0, "unit": "ask for price", "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&h=500&fit=crop"},
+    {"id": "i1", "name": "Cupcakes", "category": "Individual Desserts", "description": "Chocolate, Vanilla, Raspberry Lemon", "price": 3.00, "unit": "per piece", "image": "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=500&h=500&fit=crop"},
+    {"id": "ms4", "name": "Canelé", "category": "Mini Sweets", "description": "French caramelized pastry", "price": 1.30, "unit": "per piece", "image": "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=500&h=500&fit=crop"}
   ]
 }

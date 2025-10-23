@@ -7,7 +7,6 @@ import { LuxuryButton } from './LuxuryButton';
 
 const navLinks = [
   { name: 'Home', path: '/' },
-  { name: 'About', path: '/about' },
   { name: 'Menu', path: '/menu' },
   { name: 'Reviews', path: '/reviews' },
   { name: 'Contact', path: '/contact' },
@@ -24,8 +23,8 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <h1 className="text-2xl md:text-3xl font-display font-bold text-foreground">
-              Luxury Bakery
+            <h1 className="text-2xl md:text-3xl font-display font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              INGRID BAKES
             </h1>
           </Link>
 
