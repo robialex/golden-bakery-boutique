@@ -12,7 +12,7 @@ export const MapEmbed = () => {
         allowFullScreen
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="Luxury Bakery Location in Nicosia, Cyprus"
+        title="INGRID BAKES Location in Cyprus"
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
+import { Search, Info } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
@@ -39,10 +39,10 @@ const Menu = () => {
           className="text-center mb-12"
         >
           <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6">
-            Our Menu
+            Our <span className="text-primary">Menu</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our collection of handcrafted desserts and artisan pastries
+            Explore our collection of handcrafted cakes and artisan desserts
           </p>
         </motion.div>
 
@@ -69,8 +69,8 @@ const Menu = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-3 rounded-xl font-medium transition-all ${
                   selectedCategory === category
-                    ? 'bg-primary text-primary-foreground shadow-card'
-                    : 'bg-card text-muted-foreground hover:bg-secondary'
+                    ? 'bg-primary text-primary-foreground shadow-gold'
+                    : 'bg-card text-muted-foreground hover:bg-secondary hover:text-secondary-foreground border border-border'
                 }`}
                 aria-label={`Filter by ${category}`}
               >
@@ -82,7 +82,7 @@ const Menu = () => {
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -102,6 +102,75 @@ const Menu = () => {
             </p>
           </motion.div>
         )}
+
+        {/* Important Information Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-secondary text-secondary-foreground rounded-2xl p-8 shadow-lift"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Info className="h-6 w-6 text-primary" />
+            <h2 className="text-3xl font-display font-bold">Important Information</h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Serving Guide</h3>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li>• 1kg cake serves ~10 people</li>
+                <li>• For small gatherings: 150g per person</li>
+                <li>• For weddings: 50g per person</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Ordering Information</h3>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li>• Orders must be placed at least 48 hours in advance</li>
+                <li>• 50% advance payment required</li>
+                <li>• Cake design and decorations charged extra</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Delivery & Fees</h3>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li>• Delivery available (fee not included)</li>
+                <li>• Tall cakes may incur extra packaging fees</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Please Note</h3>
+              <ul className="space-y-2 text-sm opacity-90">
+                <li>• Prices may change without prior notice</li>
+                <li>• Please inform us of any dietary restrictions when ordering</li>
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Vegetarian Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-12 bg-card rounded-2xl p-8 border border-border shadow-card"
+        >
+          <h2 className="text-3xl font-display font-bold text-foreground mb-4">
+            Vegetarian Options
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            We are happy to offer a wide selection of vegetarian desserts. Please inform us of any dietary restrictions when ordering.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Most of our cakes, tarts, and desserts are vegetarian-friendly. For specific dietary requirements, please contact us directly.
+          </p>
+        </motion.div>
       </div>
     </div>
   );

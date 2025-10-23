@@ -1,119 +1,87 @@
+import { Instagram, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Facebook, Instagram } from 'lucide-react';
-import { LuxuryButton } from './LuxuryButton';
 
 export const Footer = () => {
   return (
-    <footer className="bg-card border-t border-border mt-20">
+    <footer className="bg-secondary text-secondary-foreground border-t border-primary/20 mt-20">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-display font-bold mb-4 text-foreground">
-              Luxury Bakery
+            <h3 className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
+              INGRID BAKES
             </h3>
-            <p className="text-muted-foreground text-sm">
-              Exquisite handcrafted desserts and artisan pastries in the heart of Nicosia.
+            <p className="text-secondary-foreground/80 text-sm">
+              Handcrafted cakes and desserts made with love in Cyprus.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
-            <ul className="space-y-2 text-sm">
+            <h4 className="font-semibold text-secondary-foreground mb-4">Quick Links</h4>
+            <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                  About Us
+                <Link to="/" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="text-muted-foreground hover:text-primary transition-colors">
-                  Our Menu
+                <Link to="/menu" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
+                  Menu
                 </Link>
               </li>
               <li>
-                <Link to="/reviews" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/reviews" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
                   Reviews
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/contact" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
                   Contact
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact Info */}
           <div>
-            <h4 className="font-semibold mb-4 text-foreground">Contact Us</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-                <span className="text-muted-foreground">
-                  123 Luxury Street<br />Nicosia, Cyprus 1234
-                </span>
-              </li>
-              <li className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
-                <a href="tel:+35722123456" className="text-muted-foreground hover:text-primary transition-colors">
-                  +357 22 123 456
+            <h4 className="font-semibold text-secondary-foreground mb-4">Contact Us</h4>
+            <ul className="space-y-3">
+              <li className="flex items-start text-secondary-foreground/80 text-sm">
+                <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0 text-primary" />
+                <a 
+                  href="https://maps.app.goo.gl/aHkH8fGujYyrwjBc8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  View Location on Map
                 </a>
               </li>
-              <li className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-                <a href="mailto:info@luxurybakery.cy" className="text-muted-foreground hover:text-primary transition-colors">
-                  info@luxurybakery.cy
+              <li className="flex items-center text-secondary-foreground/80 text-sm">
+                <Phone className="h-4 w-4 mr-2 flex-shrink-0 text-primary" />
+                <a href="tel:+35799127455" className="hover:text-primary transition-colors">
+                  99127455
+                </a>
+              </li>
+              <li className="flex items-center text-secondary-foreground/80 text-sm">
+                <Instagram className="h-4 w-4 mr-2 flex-shrink-0 text-primary" />
+                <a 
+                  href="https://www.instagram.com/ingridbakes.cy"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="hover:text-primary transition-colors"
+                >
+                  @ingridbakes.cy
                 </a>
               </li>
             </ul>
           </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="font-semibold mb-4 text-foreground">Newsletter</h4>
-            <p className="text-sm text-muted-foreground mb-3">
-              Subscribe for exclusive offers and updates
-            </p>
-            <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email"
-                className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary"
-                aria-label="Email for newsletter"
-              />
-              <LuxuryButton type="submit" size="sm" className="w-full">
-                Subscribe
-              </LuxuryButton>
-            </form>
-
-            {/* Social Media */}
-            <div className="flex items-center space-x-3 mt-4">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-border mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; 2025 Luxury Bakery. All rights reserved.</p>
+        <div className="border-t border-primary/20 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-secondary-foreground/80">
+          <p>&copy; 2024 INGRID BAKES. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-primary transition-colors">
               Privacy Policy
