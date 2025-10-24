@@ -21,7 +21,7 @@ export const FeaturedDesserts = () => {
   };
 
   return (
-    <section className="py-20 bg-card">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

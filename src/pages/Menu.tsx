@@ -1,31 +1,47 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Info } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
   const addItem = useCartStore((state) => state.addItem);
 
-  const filteredProducts = menuData.products.filter((product) => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const categories = ['All', ...Array.from(new Set(menuData.products.map(p => p.category)))];
+
+  const filteredProducts = selectedCategory === 'All'
+    ? menuData.products
+    : menuData.products.filter(p => p.category === selectedCategory);
 
   const handleAddToCart = (product: typeof menuData.products[0]) => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-    });
-    toast.success(`${product.name} added to cart!`);
+    if (product.price > 0) {
+      addItem({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+      });
+      toast.success(`${product.name} added to cart!`);
+    }
+  };
+
+  // Group products by category for display
+  const productsByCategory = categories
+    .filter(cat => cat !== 'All')
+    .map(category => ({
+      name: category,
+      products: menuData.products.filter(p => p.category === category)
+    }));
+
+  const scrollCategory = (categoryName: string, direction: 'left' | 'right') => {
+    const container = document.getElementById(`category-${categoryName}`);
+    if (container) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
   };
 
   return (
@@ -42,47 +58,97 @@ const Menu = () => {
             Our <span className="text-primary">Menu</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Explore our collection of handcrafted cakes and artisan desserts
+            Handcrafted desserts made with premium ingredients and Mediterranean love
           </p>
         </motion.div>
 
-        {/* Filters */}
-        <div className="mb-12">
-          {/* Search */}
-          <div className="relative max-w-md mx-auto mb-6">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search desserts..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-border rounded-xl bg-card focus:outline-none focus:ring-2 focus:ring-primary transition-all"
-              aria-label="Search menu items"
-            />
+        {/* Horizontal Scrollable Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
+        >
+          <div className="relative">
+            <div className="flex overflow-x-auto horizontal-scroll gap-3 pb-4">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-3 rounded-xl font-medium whitespace-nowrap transition-all border-2 ${
+                    selectedCategory === category
+                      ? 'bg-primary text-primary-foreground border-primary shadow-gold'
+                      : 'bg-card text-foreground border-primary/30 hover:border-primary'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
           </div>
+        </motion.div>
 
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {menuData.categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
-                  selectedCategory === category
-                    ? 'bg-primary text-primary-foreground shadow-gold'
-                    : 'bg-card text-muted-foreground hover:bg-secondary hover:text-secondary-foreground border border-border'
+        {/* Display by Category with Horizontal Scroll */}
+        {selectedCategory === 'All' ? (
+          <div className="space-y-16">
+            {productsByCategory.map((categoryGroup, index) => (
+              <motion.section
+                key={categoryGroup.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className={`py-12 rounded-2xl ${
+                  index % 2 === 0 ? 'bg-background' : 'bg-card'
                 }`}
-                aria-label={`Filter by ${category}`}
               >
-                {category}
-              </button>
+                <div className="container mx-auto px-4">
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+                      {categoryGroup.name}
+                    </h2>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => scrollCategory(categoryGroup.name, 'left')}
+                        className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => scrollCategory(categoryGroup.name, 'right')}
+                        className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all"
+                        aria-label="Scroll right"
+                      >
+                        <ChevronRight className="h-5 w-5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div
+                    id={`category-${categoryGroup.name}`}
+                    className="flex overflow-x-auto horizontal-scroll gap-6 pb-4"
+                  >
+                    {categoryGroup.products.map((product) => (
+                      <div key={product.id} className="flex-shrink-0 w-80">
+                        <ProductCard
+                          {...product}
+                          onAddToCart={() => handleAddToCart(product)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.section>
             ))}
           </div>
-        </div>
-
-        {/* Products Grid */}
-        {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -90,87 +156,81 @@ const Menu = () => {
                 onAddToCart={() => handleAddToCart(product)}
               />
             ))}
-          </div>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-12"
-          >
-            <p className="text-xl text-muted-foreground">
-              No products found matching your criteria
-            </p>
           </motion.div>
         )}
 
-        {/* Important Information Section */}
-        <motion.div
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-2xl text-muted-foreground">No products found in this category</p>
+          </div>
+        )}
+
+        {/* Important Information */}
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-secondary text-secondary-foreground rounded-2xl p-8 shadow-lift"
+          className="mt-20 bg-secondary text-secondary-foreground rounded-2xl p-8 md:p-12 shadow-lift border-2 border-primary"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <Info className="h-6 w-6 text-primary" />
-            <h2 className="text-3xl font-display font-bold">Important Information</h2>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6">
+          <h2 className="text-3xl font-display font-bold mb-6 text-center">
+            Important Information
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div>
               <h3 className="text-xl font-semibold mb-3 text-primary">Serving Guide</h3>
-              <ul className="space-y-2 text-sm opacity-90">
+              <ul className="space-y-2 text-secondary-foreground/90">
                 <li>• 1kg cake serves ~10 people</li>
-                <li>• For small gatherings: 150g per person</li>
-                <li>• For weddings: 50g per person</li>
+                <li>• Small gatherings: 150g per person</li>
+                <li>• Weddings: 50g per person</li>
               </ul>
             </div>
-            
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Ordering Information</h3>
-              <ul className="space-y-2 text-sm opacity-90">
-                <li>• Orders must be placed at least 48 hours in advance</li>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Ordering</h3>
+              <ul className="space-y-2 text-secondary-foreground/90">
+                <li>• Order 48 hours in advance</li>
                 <li>• 50% advance payment required</li>
-                <li>• Cake design and decorations charged extra</li>
+                <li>• Cake design charged extra</li>
               </ul>
             </div>
-            
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Delivery & Fees</h3>
-              <ul className="space-y-2 text-sm opacity-90">
-                <li>• Delivery available (fee not included)</li>
-                <li>• Tall cakes may incur extra packaging fees</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Please Note</h3>
-              <ul className="space-y-2 text-sm opacity-90">
-                <li>• Prices may change without prior notice</li>
-                <li>• Please inform us of any dietary restrictions when ordering</li>
+              <h3 className="text-xl font-semibold mb-3 text-primary">Delivery</h3>
+              <ul className="space-y-2 text-secondary-foreground/90">
+                <li>• Delivery available (fee applies)</li>
+                <li>• Tall cakes: extra packaging fee</li>
+                <li>• Prices may change without notice</li>
               </ul>
             </div>
           </div>
-        </motion.div>
+        </motion.section>
 
-        {/* Vegetarian Section */}
-        <motion.div
+        {/* Vegetarian Options */}
+        <motion.section
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-12 bg-card rounded-2xl p-8 border border-border shadow-card"
+          className="mt-12 bg-card rounded-2xl p-8 md:p-12 shadow-card border-2 border-primary/20"
         >
-          <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-            Vegetarian Options
+          <h2 className="text-3xl font-display font-bold mb-4 text-center text-foreground">
+            Vegetarian <span className="text-primary">Options</span>
           </h2>
-          <p className="text-muted-foreground mb-4">
-            We are happy to offer a wide selection of vegetarian desserts. Please inform us of any dietary restrictions when ordering.
+          <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+            We are happy to offer a wide selection of vegetarian desserts. 
+            Please inform us of any dietary restrictions when ordering.
           </p>
-          <p className="text-sm text-muted-foreground">
-            Most of our cakes, tarts, and desserts are vegetarian-friendly. For specific dietary requirements, please contact us directly.
-          </p>
-        </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {menuData.products
+              .filter(p => p.vegetarian)
+              .map((product) => (
+                <ProductCard
+                  key={product.id}
+                  {...product}
+                  onAddToCart={() => handleAddToCart(product)}
+                />
+              ))}
+          </div>
+        </motion.section>
       </div>
     </div>
   );

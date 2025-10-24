@@ -13,7 +13,7 @@ const Home = () => {
       </div>
       
       {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-b from-background to-background-secondary">
+      <section className="py-20 bg-secondary">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

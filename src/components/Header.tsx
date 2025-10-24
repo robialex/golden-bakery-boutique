@@ -18,13 +18,13 @@ export const Header = () => {
   const totalItems = useCartStore((state) => state.getTotalItems());
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/80 backdrop-blur-md border-b border-border shadow-subtle">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-secondary backdrop-blur-md border-b border-primary/20 shadow-lift">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <h1 className="text-2xl md:text-3xl font-display font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-              INGRID BAKES
+            <h1 className="text-2xl md:text-3xl font-display font-bold text-primary">
+              Ingrid Bakes
             </h1>
           </Link>
 
@@ -37,7 +37,7 @@ export const Header = () => {
                 className={`text-sm font-medium transition-colors hover:text-primary ${
                   location.pathname === link.path
                     ? 'text-primary'
-                    : 'text-muted-foreground'
+                    : 'text-secondary-foreground'
                 }`}
               >
                 {link.name}
@@ -61,7 +61,7 @@ export const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-foreground"
+              className="md:hidden p-2 text-secondary-foreground"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -88,7 +88,7 @@ export const Header = () => {
                     className={`block px-4 py-2 rounded-lg transition-colors ${
                       location.pathname === link.path
                         ? 'bg-primary text-primary-foreground'
-                        : 'text-foreground hover:bg-secondary'
+                        : 'text-secondary-foreground hover:bg-primary/20'
                     }`}
                   >
                     {link.name}

@@ -51,7 +51,7 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-xl md:text-2xl font-light text-secondary-foreground leading-relaxed max-w-2xl mx-auto"
             >
-              Artisanal cakes and desserts crafted with passion, elegance, and a taste of Cyprus
+              Discover our handcrafted desserts — where taste meets art
             </motion.p>
           </div>
         </motion.div>
