@@ -21,7 +21,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        {/* Contact Cards - Three Column Layout */}
+        {/* Elegant Contact Icons - Three Column Layout */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           <motion.a
             href="https://maps.app.goo.gl/aHkH8fGujYyrwjBc8"
@@ -30,15 +30,15 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-card rounded-xl p-8 shadow-card hover:shadow-lift transition-all text-center border-2 border-primary/20 hover:border-primary group"
+            className="bg-card rounded-lg p-6 shadow-card hover:shadow-lift transition-all text-center border border-primary/30 hover:border-primary group"
           >
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <MapPin className="h-8 w-8 text-primary" />
+            <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-primary/20">
+              <MapPin className="h-7 w-7 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Location</h3>
-            <p className="text-muted-foreground">Ingrid Bakes</p>
-            <p className="text-muted-foreground">Nicosia, Cyprus</p>
-            <p className="text-primary text-sm mt-2">View on Map →</p>
+            <h3 className="text-lg font-semibold text-card-foreground mb-2">Location</h3>
+            <p className="text-muted-foreground text-sm">Ingrid Bakes</p>
+            <p className="text-muted-foreground text-sm">Nicosia, Cyprus</p>
+            <p className="text-primary text-xs mt-2 font-medium">View on Map →</p>
           </motion.a>
 
           <motion.a
@@ -46,31 +46,31 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-card rounded-xl p-8 shadow-card hover:shadow-lift transition-all text-center border-2 border-primary/20 hover:border-primary group"
+            className="bg-card rounded-lg p-6 shadow-card hover:shadow-lift transition-all text-center border border-primary/30 hover:border-primary group"
           >
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <Phone className="h-8 w-8 text-primary" />
+            <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-primary/20">
+              <Phone className="h-7 w-7 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Phone</h3>
-            <p className="text-muted-foreground">(+357) 99127455</p>
-            <p className="text-primary text-sm mt-2">Call us →</p>
+            <h3 className="text-lg font-semibold text-card-foreground mb-2">Phone</h3>
+            <p className="text-muted-foreground text-sm">(+357) 99127455</p>
+            <p className="text-primary text-xs mt-2 font-medium">Call us →</p>
           </motion.a>
 
           <motion.a
-            href="https://www.instagram.com/ingridbakes.cy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            href="https://www.instagram.com/ingridbakes.cy/"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-card rounded-xl p-8 shadow-card hover:shadow-lift transition-all text-center border-2 border-primary/20 hover:border-primary group"
+            className="bg-card rounded-lg p-6 shadow-card hover:shadow-lift transition-all text-center border border-primary/30 hover:border-primary group"
           >
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <Instagram className="h-8 w-8 text-primary" />
+            <div className="w-14 h-14 bg-primary/5 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-primary/20">
+              <Instagram className="h-7 w-7 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">Instagram</h3>
-            <p className="text-muted-foreground">@ingridbakes.cy</p>
-            <p className="text-primary text-sm mt-2">Follow us →</p>
+            <h3 className="text-lg font-semibold text-card-foreground mb-2">Instagram</h3>
+            <p className="text-muted-foreground text-sm">@ingridbakes.cy</p>
+            <p className="text-primary text-xs mt-2 font-medium">Follow us →</p>
           </motion.a>
         </div>
 
@@ -89,16 +89,16 @@ const Contact = () => {
           </div>
           <div className="max-w-md mx-auto space-y-3">
             <div className="flex justify-between items-center py-2 border-b border-border">
-              <span className="text-foreground font-medium">Monday – Friday</span>
-              <span className="text-muted-foreground">8:30 AM – 7:00 PM</span>
+              <span className="text-card-foreground font-medium">Monday – Friday</span>
+              <span className="text-muted-foreground">8:30am – 7pm</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b border-border">
-              <span className="text-foreground font-medium">Saturday</span>
-              <span className="text-muted-foreground">9:00 AM – 7:30 PM</span>
+              <span className="text-card-foreground font-medium">Saturday</span>
+              <span className="text-muted-foreground">9am – 7:30pm</span>
             </div>
             <div className="flex justify-between items-center py-2">
-              <span className="text-foreground font-medium">Sunday</span>
-              <span className="text-muted-foreground">9:00 AM – 7:00 PM</span>
+              <span className="text-card-foreground font-medium">Sunday</span>
+              <span className="text-muted-foreground">9am – 7pm</span>
             </div>
           </div>
         </motion.div>

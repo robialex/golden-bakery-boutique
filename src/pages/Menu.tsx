@@ -62,7 +62,7 @@ const Menu = () => {
           </p>
         </motion.div>
 
-        {/* Horizontal Scrollable Category Filter */}
+        {/* Compact Horizontal Scrollable Category Filter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -70,15 +70,15 @@ const Menu = () => {
           className="mb-12"
         >
           <div className="relative">
-            <div className="flex overflow-x-auto horizontal-scroll gap-3 pb-4">
+            <div className="flex overflow-x-auto horizontal-scroll gap-2 pb-4 scrollbar-hide">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-xl font-medium whitespace-nowrap transition-all border-2 ${
+                  className={`px-5 py-2 rounded-lg font-medium whitespace-nowrap transition-all text-sm ${
                     selectedCategory === category
-                      ? 'bg-primary text-primary-foreground border-primary shadow-gold'
-                      : 'bg-card text-foreground border-primary/30 hover:border-primary'
+                      ? 'bg-secondary text-secondary-foreground border border-primary shadow-card'
+                      : 'bg-card text-card-foreground border border-primary/20 hover:border-primary'
                   }`}
                 >
                   {category}

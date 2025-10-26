@@ -8,48 +8,48 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* INGRID BAKES - Luxurious navy, creme, and gold palette */
+    /* INGRID BAKES - Luxurious navy, cream, and metallic gold palette */
     
     /* Backgrounds */
-    --background: 40 67% 98%; /* Rich creme #FAF3E0 */
-    --background-secondary: 223 57% 15%; /* Deep navy #0E1E3A */
-    --foreground: 223 57% 15%; /* Deep navy for text */
+    --background: 223 57% 15%; /* Deep navy #0A1D3A for main background */
+    --background-secondary: 44 70% 95%; /* Warm cream #FDF6E3 for sections */
+    --foreground: 44 70% 95%; /* Cream text on navy */
     
-    --card: 0 0% 100%; /* Pure white for cards */
-    --card-foreground: 223 57% 15%;
+    --card: 44 70% 95%; /* Cream for cards */
+    --card-foreground: 216 67% 15%; /* Dark navy text on cream */
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 223 57% 15%;
+    --popover: 44 70% 95%;
+    --popover-foreground: 216 67% 15%;
     
     /* Primary - Real metallic gold */
-    --primary: 43 74% 53%; /* #D4AF37 true gold */
-    --primary-foreground: 223 57% 15%;
-    --primary-hover: 43 74% 48%;
+    --primary: 43 74% 53%; /* #D4AF37 metallic gold */
+    --primary-foreground: 216 67% 15%; /* Navy text on gold */
+    --primary-hover: 43 74% 48%; /* Rich gold hover #C6A136 */
     
-    /* Secondary - Navy */
-    --secondary: 223 57% 15%;
-    --secondary-foreground: 40 67% 98%;
+    /* Secondary - Deep navy for buttons */
+    --secondary: 216 67% 15%; /* Deep navy #102040 */
+    --secondary-foreground: 44 70% 95%; /* Cream text on navy */
     
-    --muted: 40 40% 92%;
-    --muted-foreground: 223 20% 45%;
+    --muted: 43 74% 48%;
+    --muted-foreground: 216 20% 45%;
     
-    --accent: 43 74% 53%;
-    --accent-foreground: 223 57% 15%;
+    --accent: 43 74% 53%; /* Gold */
+    --accent-foreground: 216 67% 15%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 43 50% 75%;
-    --input: 43 30% 85%;
+    --border: 43 74% 53%; /* Gold borders */
+    --input: 43 74% 53%;
     --ring: 43 74% 53%;
     
-    --radius: 0.75rem;
+    --radius: 0.5rem;
     
-    /* Luxury shadows with gold and navy tints */
-    --shadow-subtle: 0 1px 3px rgba(212, 175, 55, 0.08);
-    --shadow-card: 0 4px 16px rgba(14, 30, 58, 0.1), 0 0 0 1px rgba(212, 175, 55, 0.12);
-    --shadow-lift: 0 8px 32px rgba(14, 30, 58, 0.15), 0 0 0 1px rgba(212, 175, 55, 0.2);
-    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.4), 0 8px 32px rgba(212, 175, 55, 0.2);
+    /* Elegant shadows with metallic gold */
+    --shadow-subtle: 0 2px 8px rgba(212, 175, 55, 0.08);
+    --shadow-card: 0 4px 16px rgba(212, 175, 55, 0.12);
+    --shadow-lift: 0 8px 32px rgba(212, 175, 55, 0.18);
+    --shadow-gold: 0 4px 24px rgba(212, 175, 55, 0.35);
     
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     
@@ -219,5 +219,15 @@ All colors MUST be HSL.
 
   .horizontal-scroll::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary-hover));
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }

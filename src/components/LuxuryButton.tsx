@@ -7,10 +7,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground shadow-gold hover:shadow-lift border-2 border-primary transition-all duration-300',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground border-2 border-primary transition-all duration-300',
-        ghost: 'border-2 border-primary text-background bg-secondary hover:bg-primary hover:text-primary-foreground transition-all duration-300',
-        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 border-2 border-destructive',
+        primary: 'bg-primary text-[#102040] hover:bg-primary-hover shadow-gold hover:shadow-lift border border-primary transition-all duration-300 font-semibold',
+        secondary: 'bg-secondary text-secondary-foreground hover:border-primary border-2 border-secondary transition-all duration-300 font-semibold',
+        ghost: 'border border-primary text-foreground bg-transparent hover:bg-primary/10 transition-all duration-300',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 border border-destructive',
         link: 'text-primary underline-offset-4 hover:underline',
       },
       size: {

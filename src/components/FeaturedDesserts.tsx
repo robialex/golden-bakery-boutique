@@ -21,8 +21,11 @@ export const FeaturedDesserts = () => {
   };
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background-secondary">
       <div className="container mx-auto px-4">
+        {/* Gold divider above */}
+        <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent mb-16"></div>
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -30,11 +33,11 @@ export const FeaturedDesserts = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
-            Featured Creations
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-card-foreground mb-4">
+            Featured <span className="text-primary">Creations</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our signature desserts, handcrafted with passion and precision
+            Discover our most popular handcrafted desserts
           </p>
         </motion.div>
 

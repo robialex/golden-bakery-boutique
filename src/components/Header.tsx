@@ -18,44 +18,43 @@ export const Header = () => {
   const totalItems = useCartStore((state) => state.getTotalItems());
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-secondary backdrop-blur-md border-b border-primary/20 shadow-lift">
-      <nav className="container mx-auto px-4 py-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-primary/40 backdrop-blur-md shadow-gold">
+      <nav className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <h1 className="text-2xl md:text-3xl font-display font-bold text-primary">
+            <h1 className="text-2xl md:text-3xl font-display font-bold text-primary tracking-wide">
               Ingrid Bakes
             </h1>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - positioned to the right */}
+          <div className="hidden md:flex items-center gap-10 ml-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
+                className={`text-base font-medium transition-colors relative group ${
                   location.pathname === link.path
                     ? 'text-primary'
-                    : 'text-secondary-foreground'
+                    : 'text-foreground hover:text-primary'
                 }`}
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
 
           {/* Cart & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 ml-6">
             <Link to="/cart" className="relative">
-              <LuxuryButton variant="ghost" size="icon" aria-label="Shopping cart">
-                <ShoppingCart className="h-5 w-5" />
-                {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                    {totalItems}
-                  </span>
-                )}
-              </LuxuryButton>
+              <ShoppingCart className="h-6 w-6 text-foreground hover:text-primary transition-colors" />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-gold">
+                  {totalItems}
+                </span>
+              )}
             </Link>
 
             {/* Mobile Menu Button */}
