@@ -196,11 +196,19 @@ All colors MUST be HSL.
       #D4AF37 80%,
       #C6A136 100%
     );
-    background-size: 200% 100%;
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: goldShimmer 4s ease-in-out infinite;
+  }
+  
+  /* Mobile optimization */
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   /* Button lift effect */

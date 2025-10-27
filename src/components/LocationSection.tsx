@@ -1,31 +1,46 @@
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Instagram, Clock } from 'lucide-react';
-import { MapEmbed } from '@/components/MapEmbed';
+import { MapEmbed } from './MapEmbed';
 
-const Contact = () => {
+export const LocationSection = () => {
   return (
-    <div className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]">
+    <section className="py-20 bg-background">
       <div className="container mx-auto px-4">
+        {/* Gold divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent mb-16"></div>
+        
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6">
-            Get in <span className="text-primary">Touch</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            We'd love to hear from you! Reach out for orders, inquiries, or just to say hello.
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-4">
+            Visit <span className="text-primary">Us</span>
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Come experience our handcrafted desserts in Nicosia, Cyprus
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto mb-16">
-          {/* Contact Information */}
+        <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          {/* Map */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <MapEmbed />
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="space-y-8"
           >
             {/* Location */}
@@ -96,19 +111,8 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-
-          {/* Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <MapEmbed />
-          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
-
-export default Contact;
