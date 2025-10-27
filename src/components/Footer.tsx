@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <footer className="bg-secondary text-secondary-foreground border-t border-primary/20 mt-20">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
@@ -16,32 +16,6 @@ export const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-secondary-foreground mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/menu" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
-                  Menu
-                </Link>
-              </li>
-              <li>
-                <Link to="/reviews" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
-                  Reviews
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-secondary-foreground/80 hover:text-primary transition-colors text-sm">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
 
           {/* Contact Info */}
           <div>

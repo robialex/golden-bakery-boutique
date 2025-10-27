@@ -12,10 +12,10 @@ All colors MUST be HSL.
     
     /* Backgrounds */
     --background: 223 57% 15%; /* Deep navy #0A1D3A for main background */
-    --background-secondary: 44 70% 95%; /* Warm cream #FDF6E3 for sections */
+    --background-secondary: 44 70% 95%; /* Warm cream #F5F1E6 for sections */
     --foreground: 44 70% 95%; /* Cream text on navy */
     
-    --card: 44 70% 95%; /* Cream for cards */
+    --card: 44 70% 95%; /* Cream for cards #F5F1E6 */
     --card-foreground: 216 67% 15%; /* Dark navy text on cream */
     
     --popover: 44 70% 95%;
@@ -24,10 +24,10 @@ All colors MUST be HSL.
     /* Primary - Real metallic gold */
     --primary: 43 74% 53%; /* #D4AF37 metallic gold */
     --primary-foreground: 216 67% 15%; /* Navy text on gold */
-    --primary-hover: 43 74% 48%; /* Rich gold hover #C6A136 */
+    --primary-hover: 43 60% 45%; /* Rich gold hover #C6A136 */
     
     /* Secondary - Deep navy for buttons */
-    --secondary: 216 67% 15%; /* Deep navy #102040 */
+    --secondary: 216 67% 17%; /* Deep navy #1B2C4B */
     --secondary-foreground: 44 70% 95%; /* Cream text on navy */
     
     --muted: 43 74% 48%;
@@ -130,6 +130,13 @@ All colors MUST be HSL.
     scroll-behavior: smooth;
   }
 
+  /* Mobile optimization */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
   /* Reduced motion preferences */
   @media (prefers-reduced-motion: reduce) {
     *,
@@ -168,7 +175,7 @@ All colors MUST be HSL.
     animation: fadeInUp 0.8s ease-out forwards;
   }
 
-  /* Gold shimmer effect */
+  /* Gold shimmer effect - Metallic and luxurious */
   @keyframes goldShimmer {
     0% {
       background-position: -1000px 0;
@@ -180,18 +187,42 @@ All colors MUST be HSL.
 
   .gold-shimmer {
     background: linear-gradient(
-      90deg,
-      hsl(var(--primary)) 0%,
-      hsl(var(--primary-hover)) 25%,
-      hsl(43 90% 65%) 50%,
-      hsl(var(--primary-hover)) 75%,
-      hsl(var(--primary)) 100%
+      110deg,
+      #C6A136 0%,
+      #D4AF37 20%,
+      #F0E68C 40%,
+      #FFD700 50%,
+      #F0E68C 60%,
+      #D4AF37 80%,
+      #C6A136 100%
     );
-    background-size: 2000px 100%;
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: goldShimmer 3s linear infinite;
+    animation: goldShimmer 4s ease-in-out infinite;
+  }
+
+  /* Button lift effect */
+  @keyframes buttonLift {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  /* Smooth entrance */
+  @keyframes smoothEntrance {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Horizontal scroll container */

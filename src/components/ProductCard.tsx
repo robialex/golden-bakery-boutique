@@ -15,12 +15,12 @@ interface ProductCardProps {
 export const ProductCard = ({ name, description, price, unit, image, onAddToCart }: ProductCardProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ y: -8 }}
-      className="bg-card rounded-xl shadow-card hover:shadow-lift transition-all duration-300 overflow-hidden group"
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="bg-card rounded-xl shadow-card hover:shadow-lift transition-all duration-500 overflow-hidden group border-2 border-primary/20 hover:border-primary"
     >
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
@@ -53,12 +53,13 @@ export const ProductCard = ({ name, description, price, unit, image, onAddToCart
           {price > 0 && (
             <LuxuryButton
               size="sm"
+              variant="secondary"
               onClick={onAddToCart}
-              className="group-hover:scale-105"
+              className="group-hover:scale-105 border border-primary/30"
               aria-label={`Add ${name} to cart`}
             >
               <Plus className="h-4 w-4 mr-1" />
-              Add to Cart
+              Add
             </LuxuryButton>
           )}
         </div>

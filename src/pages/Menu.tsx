@@ -45,7 +45,9 @@ const Menu = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]" style={{
+      backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.03) 35px, rgba(198, 161, 54, 0.03) 70px)`
+    }}>
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
