@@ -30,45 +30,68 @@ const Menu = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
+          <motion.h1 
+            className="text-5xl md:text-6xl font-display font-bold text-white mb-6"
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Our <span className="text-primary">Menu</span>
-          </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-white/90 max-w-3xl mx-auto mb-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
             Handcrafted desserts made with premium ingredients and Mediterranean love
-          </p>
+          </motion.p>
           
           {/* Quick Link to Vegetarian */}
-          <Link 
-            to="/menu/vegetarian"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-xl font-semibold hover:shadow-gold transition-all duration-300"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            View Vegetarian Options
-          </Link>
+            <Link 
+              to="/menu/vegetarian"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-xl font-semibold hover:shadow-gold hover:scale-105 transition-all duration-300"
+            >
+              View Vegetarian Options
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Category Previews */}
         <div className="space-y-8">
           {productsByCategory.map((categoryGroup, index) => (
-            <CategoryPreview
+            <motion.div
               key={categoryGroup.name}
-              category={categoryGroup.name}
-              products={categoryGroup.products}
-              index={index}
-            />
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.7, delay: index * 0.1 }}
+            >
+              <CategoryPreview
+                category={categoryGroup.name}
+                products={categoryGroup.products}
+                index={index}
+              />
+            </motion.div>
           ))}
         </div>
 
         {/* Important Information */}
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="mt-20 bg-[#1B2C4B] text-white rounded-2xl p-8 md:p-12 shadow-lift border-2 border-primary"
         >
           <h2 className="text-3xl font-display font-bold mb-6 text-center">
