@@ -1,20 +1,17 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { MenuCategory } from '@/components/MenuCategory';
+import { CategoryPreview } from '@/components/CategoryPreview';
 import menuData from '@/data/menu.json';
 
 const Menu = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  // Get unique categories
+  const categories = Array.from(new Set(menuData.products.map(p => p.category)));
 
-  const categories = ['All', ...Array.from(new Set(menuData.products.map(p => p.category)))];
-
-  // Group products by category for display
-  const productsByCategory = categories
-    .filter(cat => cat !== 'All')
-    .map(category => ({
-      name: category,
-      products: menuData.products.filter(p => p.category === category)
-    }));
+  // Group products by category
+  const productsByCategory = categories.map(category => ({
+    name: category,
+    products: menuData.products.filter(p => p.category === category)
+  }));
 
   return (
     <div 
@@ -24,11 +21,12 @@ const Menu = () => {
       }}
     >
       <div 
-        className="absolute inset-0 pointer-events-none" 
+        className="absolute inset-0 pointer-events-none opacity-30" 
         style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.02) 35px, rgba(198, 161, 54, 0.02) 70px)`
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.03) 35px, rgba(198, 161, 54, 0.03) 70px)`
         }}
       />
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
@@ -40,53 +38,29 @@ const Menu = () => {
           <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
             Our <span className="text-primary">Menu</span>
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
             Handcrafted desserts made with premium ingredients and Mediterranean love
           </p>
+          
+          {/* Quick Link to Vegetarian */}
+          <Link 
+            to="/menu/vegetarian"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-xl font-semibold hover:shadow-gold transition-all duration-300"
+          >
+            View Vegetarian Options
+          </Link>
         </motion.div>
 
-        {/* Compact Horizontal Scrollable Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12"
-        >
-          <div className="flex overflow-x-auto gap-2 pb-4 scrollbar-hide">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium whitespace-nowrap transition-all text-sm ${
-                  selectedCategory === category
-                    ? 'bg-primary text-[#1B2C4B] border border-primary shadow-gold'
-                    : 'bg-[#1B2C4B] text-white border border-primary/30 hover:border-primary'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Display by Category with Expandable Sections */}
-        <div className="space-y-12">
-          {selectedCategory === 'All' ? (
-            productsByCategory.map((categoryGroup, index) => (
-              <MenuCategory
-                key={categoryGroup.name}
-                category={categoryGroup.name}
-                products={categoryGroup.products}
-                index={index}
-              />
-            ))
-          ) : (
-            <MenuCategory
-              category={selectedCategory}
-              products={menuData.products.filter(p => p.category === selectedCategory)}
-              index={0}
+        {/* Category Previews */}
+        <div className="space-y-8">
+          {productsByCategory.map((categoryGroup, index) => (
+            <CategoryPreview
+              key={categoryGroup.name}
+              category={categoryGroup.name}
+              products={categoryGroup.products}
+              index={index}
             />
-          )}
+          ))}
         </div>
 
         {/* Important Information */}

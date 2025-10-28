@@ -55,11 +55,10 @@ export const ProductCard = ({ name, description, price, unit, image, onAddToCart
               size="sm"
               variant="secondary"
               onClick={onAddToCart}
-              className="group-hover:scale-105 border border-primary/30"
+              className="border border-primary/30"
               aria-label={`Add ${name} to cart`}
             >
-              <Plus className="h-4 w-4 mr-1" />
-              Add
+              Add to Cart
             </LuxuryButton>
           )}
         </div>

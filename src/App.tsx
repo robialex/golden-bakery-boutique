@@ -7,6 +7,8 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
+import CategoryDetail from "./pages/CategoryDetail";
+import Vegetarian from "./pages/Vegetarian";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import Contact from "./pages/Contact";
@@ -30,6 +32,8 @@ const App = () => (
               <Route path="/" element={<Home />} />
               
               <Route path="/menu" element={<Menu />} />
+              <Route path="/menu/:category" element={<CategoryDetail />} />
+              <Route path="/menu/vegetarian" element={<Vegetarian />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/order" element={<Order />} />
               <Route path="/contact" element={<Contact />} />
