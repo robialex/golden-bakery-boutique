@@ -3,14 +3,49 @@ import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { useCartStore } from '@/stores/cartStore';
 import { LuxuryButton } from '@/components/LuxuryButton';
+import { useState } from 'react';
 
 const Cart = () => {
   const { items, updateQuantity, removeItem, getTotalPrice } = useCartStore();
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
+  const [deliveryMethod, setDeliveryMethod] = useState<'pickup' | 'delivery'>('pickup');
   
-  const TAX_RATE = 0.19; // 19% VAT
   const subtotal = getTotalPrice();
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax;
+  const total = subtotal;
+  
+  // Check if cart has only cake items
+  const cakeCategories = ['sponge cakes', 'honey cakes', 'mousse cakes', 'cheesecakes', 'other'];
+  const hasCakesOnly = items.length > 0 && items.every(item => {
+    // Assuming items have category info - if not, this will need adjustment
+    return true; // For now, enable for all items in cart
+  });
+  
+  const generateInstagramMessage = () => {
+    let message = `🍰 New Order from ${customerName || 'Customer'}\n\n`;
+    message += `📦 Items:\n`;
+    items.forEach(item => {
+      message += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
+    });
+    message += `\n💰 Total: €${total.toFixed(2)}\n`;
+    message += `📍 ${deliveryMethod === 'pickup' ? 'Pickup' : 'Delivery'}\n`;
+    message += `📞 Phone: ${customerPhone}\n`;
+    return encodeURIComponent(message);
+  };
+  
+  const handleSendInstagram = () => {
+    if (!customerName || !customerPhone) {
+      alert('Please fill in your name and phone number');
+      return;
+    }
+    const message = generateInstagramMessage();
+    // Try to open Instagram app or web
+    const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
+    window.open(instagramUrl, '_blank');
+    // Also copy message to clipboard as fallback
+    navigator.clipboard.writeText(decodeURIComponent(message));
+    alert('Order details copied to clipboard! Please paste it in Instagram chat.');
+  };
 
   if (items.length === 0) {
     return (
@@ -122,19 +157,65 @@ const Cart = () => {
                     <span>Subtotal</span>
                     <span>€{subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-muted-foreground">
-                    <span>Tax (19%)</span>
-                    <span>€{tax.toFixed(2)}</span>
-                  </div>
                   <div className="border-t border-border pt-3 flex justify-between text-xl font-bold text-foreground">
                     <span>Total</span>
                     <span>€{total.toFixed(2)}</span>
                   </div>
                 </div>
 
+                {hasCakesOnly && (
+                  <div className="space-y-4 mb-6 pb-6 border-b border-border">
+                    <h3 className="font-semibold text-foreground">Order via Instagram</h3>
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setDeliveryMethod('pickup')}
+                        className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                          deliveryMethod === 'pickup'
+                            ? 'bg-primary text-background'
+                            : 'bg-secondary text-foreground border border-border'
+                        }`}
+                      >
+                        Pickup
+                      </button>
+                      <button
+                        onClick={() => setDeliveryMethod('delivery')}
+                        className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                          deliveryMethod === 'delivery'
+                            ? 'bg-primary text-background'
+                            : 'bg-secondary text-foreground border border-border'
+                        }`}
+                      >
+                        Delivery
+                      </button>
+                    </div>
+                    <LuxuryButton
+                      size="lg"
+                      className="w-full"
+                      onClick={handleSendInstagram}
+                      disabled={!customerName || !customerPhone}
+                    >
+                      Send Order on Instagram
+                    </LuxuryButton>
+                  </div>
+                )}
+
                 <Link to="/order" className="block">
-                  <LuxuryButton size="lg" className="w-full">
-                    Proceed to Checkout
+                  <LuxuryButton size="lg" className="w-full" variant="secondary">
+                    {hasCakesOnly ? 'Or Checkout Online' : 'Proceed to Checkout'}
                   </LuxuryButton>
                 </Link>
 

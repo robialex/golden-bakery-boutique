@@ -105,6 +105,7 @@ const CategoryDetail = () => {
             >
               <ProductCard
                 {...product}
+                category={product.category}
                 onAddToCart={() => handleAddToCart(product)}
               />
             </motion.div>

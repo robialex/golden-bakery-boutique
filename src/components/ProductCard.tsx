@@ -9,10 +9,15 @@ interface ProductCardProps {
   price: number;
   unit?: string;
   image: string;
+  category?: string;
   onAddToCart: () => void;
 }
 
-export const ProductCard = ({ name, description, price, unit, image, onAddToCart }: ProductCardProps) => {
+export const ProductCard = ({ name, description, price, unit, image, category, onAddToCart }: ProductCardProps) => {
+  // Only show Add to Cart for cake categories
+  const cakeCategories = ['Honey Cakes', 'Mousse Cakes', 'Sponge Cakes', 'Cheesecakes', 'Other Cakes'];
+  const isCake = category ? cakeCategories.includes(category) : true; // Default to true for backward compatibility
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -50,7 +55,7 @@ export const ProductCard = ({ name, description, price, unit, image, onAddToCart
             </span>
             {unit && <p className="text-xs text-muted-foreground">{unit}</p>}
           </div>
-          {price > 0 && (
+          {price > 0 && isCake && (
             <LuxuryButton
               size="sm"
               variant="secondary"

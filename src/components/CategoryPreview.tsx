@@ -29,12 +29,12 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
   // Create category slug for URL
   const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
 
-  // Rotate preview images every 2.5 seconds
+  // Rotate preview images every 3.5 seconds
   useEffect(() => {
     if (previewImages.length > 1) {
       const interval = setInterval(() => {
         setCurrentImageIndex((prev) => (prev + 1) % previewImages.length);
-      }, 2500);
+      }, 3500);
       return () => clearInterval(interval);
     }
   }, [previewImages.length]);
@@ -57,7 +57,7 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
 
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left: Rotating Preview Images */}
-          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lift">
+          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg">
             {previewImages.map((product, idx) => (
               <motion.img
                 key={product.id}
@@ -66,10 +66,11 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
                 className="absolute inset-0 w-full h-full object-cover"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 1 }}
+                loading="lazy"
               />
             ))}
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
           </div>
 
           {/* Right: Highlighted Item */}

@@ -12,13 +12,13 @@ const Hero = () => {
   return (
     <>
       {/* Hero Section - Title Only */}
-      <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden py-20 md:py-24">
+      <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden py-16 md:py-20">
         {/* Animated Background Image with Slow Zoom and Parallax */}
         <motion.div 
           initial={{ scale: 1.05 }}
-          animate={{ scale: 1.15 }}
+          animate={{ scale: 1.18 }}
           transition={{ 
-            duration: 40, 
+            duration: 50, 
             repeat: Infinity, 
             repeatType: "reverse",
             ease: "easeInOut"
@@ -35,18 +35,19 @@ const Hero = () => {
 
         {/* Title - Cinematic Animated Text */}
         <motion.div 
-          className="relative z-10 text-center px-4 w-full max-w-7xl mx-auto"
+          className="relative z-10 text-center px-6 w-full max-w-6xl mx-auto"
           style={{ scale: titleScale, opacity: titleOpacity }}
         >
           <motion.h1
-            initial={{ opacity: 0, filter: "blur(10px)", y: 30 }}
-            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-            transition={{ duration: 1.5, delay: 0.3, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold gold-shimmer px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold gold-shimmer px-2"
             style={{ 
               letterSpacing: '0.05em',
               textShadow: '0 0 40px rgba(198, 161, 54, 0.6), 0 0 80px rgba(198, 161, 54, 0.4), 0 4px 20px rgba(0, 0, 0, 0.3)',
-              lineHeight: '1.2'
+              lineHeight: '1.3',
+              color: '#C6A136'
             }}
           >
             Ingrid Bakes

@@ -22,7 +22,7 @@ export const AsymmetricalGallery = () => {
   ];
 
   return (
-    <section className="py-20 bg-card relative overflow-hidden border-t-2 border-b-2 border-primary/30">
+    <section className="py-20 bg-card relative overflow-hidden">
       <div className="container mx-auto px-4">
 
         {/* Desktop: Asymmetrical Two Images */}
@@ -33,22 +33,23 @@ export const AsymmetricalGallery = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.2 }}
-              className="flex items-center justify-center gap-16 max-w-6xl mx-auto"
+              transition={{ duration: 1.4 }}
+              className="flex items-center justify-center gap-24 max-w-7xl mx-auto"
             >
               {/* Left Image - Higher */}
               <motion.div
-                initial={{ opacity: 0, x: -60, y: -40 }}
+                initial={{ opacity: 0, x: -40, y: -40 }}
                 animate={{ opacity: 1, x: 0, y: -40 }}
-                exit={{ opacity: 0, x: -60 }}
-                transition={{ duration: 1.2, delay: 0.1, ease: "easeOut" }}
+                exit={{ opacity: 0, x: -40 }}
+                transition={{ duration: 1.4, delay: 0.1, ease: "easeOut" }}
                 className="flex-1 max-w-md"
               >
-                <div className="relative rounded-2xl overflow-hidden border-2 border-primary/40 shadow-lift hover:border-primary hover:shadow-gold transition-all duration-500">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-gold transition-all duration-500">
                   <img
                     src={currentProducts[0].image}
                     alt={currentProducts[0].name}
                     className="w-full h-96 object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -62,17 +63,18 @@ export const AsymmetricalGallery = () => {
 
               {/* Right Image - Lower */}
               <motion.div
-                initial={{ opacity: 0, x: 60, y: 40 }}
+                initial={{ opacity: 0, x: 40, y: 40 }}
                 animate={{ opacity: 1, x: 0, y: 40 }}
-                exit={{ opacity: 0, x: 60 }}
-                transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                exit={{ opacity: 0, x: 40 }}
+                transition={{ duration: 1.4, delay: 0.2, ease: "easeOut" }}
                 className="flex-1 max-w-md"
               >
-                <div className="relative rounded-2xl overflow-hidden border-2 border-primary/40 shadow-lift hover:border-primary hover:shadow-gold transition-all duration-500">
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl hover:shadow-gold transition-all duration-500">
                   <img
                     src={currentProducts[1].image}
                     alt={currentProducts[1].name}
                     className="w-full h-96 object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
@@ -92,17 +94,18 @@ export const AsymmetricalGallery = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="max-w-sm mx-auto"
             >
-              <div className="relative rounded-2xl overflow-hidden border-2 border-primary/40 shadow-lift">
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
                   src={currentProducts[0].image}
                   alt={currentProducts[0].name}
                   className="w-full h-80 object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
