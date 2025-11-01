@@ -41,10 +41,11 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.3 } }}
       className="bg-card rounded-xl overflow-hidden shadow-card hover:shadow-lift transition-all duration-300 border border-primary/10"
     >
       {/* Category Name - Always visible at top */}
@@ -61,14 +62,13 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
             key={product.id}
             src={product.image}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover brightness-105"
             initial={{ opacity: 0 }}
             animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
             loading="lazy"
           />
         ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
       </div>
 
       {/* Product Info */}

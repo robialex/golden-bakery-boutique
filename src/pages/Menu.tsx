@@ -103,15 +103,14 @@ const Menu = () => {
           {filteredCategories.map((categoryGroup, index) => (
             <motion.div
               key={categoryGroup.name}
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ 
-                duration: 0.6, 
-                delay: index * 0.08,
+                duration: 0.7, 
+                delay: index * 0.1,
                 ease: [0.22, 1, 0.36, 1]
               }}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <CategoryPreview
                 category={categoryGroup.name}
@@ -128,31 +127,31 @@ const Menu = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mt-16 bg-[#1B2C4B] text-white rounded-xl p-5 md:p-8 shadow-lift border border-primary/50"
+          className="mt-12 bg-[#1B2C4B] text-white rounded-lg p-4 md:p-6 shadow-md border border-primary/40"
         >
-          <h2 className="text-xl md:text-2xl font-display font-bold mb-4 text-center">
+          <h2 className="text-lg md:text-xl font-display font-bold mb-3 text-center">
             Important Information
           </h2>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto text-sm">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
             <div>
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Serving Guide</h3>
-              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Serving Guide</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• 1kg cake serves ~10 people</li>
                 <li>• Small gatherings: 150g per person</li>
                 <li>• Weddings: 50g per person</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Ordering</h3>
-              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Ordering</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• Order 48 hours in advance</li>
                 <li>• 50% advance payment required</li>
                 <li>• Cake design charged extra</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Delivery</h3>
-              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Delivery</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• Delivery available (fee applies)</li>
                 <li>• Tall cakes: extra packaging fee</li>
                 <li>• Prices may change without notice</li>

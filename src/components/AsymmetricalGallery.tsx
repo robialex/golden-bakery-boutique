@@ -19,7 +19,7 @@ export const AsymmetricalGallery = () => {
   return (
     <section className="relative w-full overflow-hidden bg-background">
       {/* Full-width image showcase */}
-      <div className="relative w-full h-[60vh] md:h-[70vh]">
+      <div className="relative w-full h-[45vh] md:h-[60vh]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -32,8 +32,8 @@ export const AsymmetricalGallery = () => {
             <img
               src={featuredProducts[currentIndex].image}
               alt={featuredProducts[currentIndex].name}
-              className="w-full h-full object-cover"
-              loading="lazy"
+              className="w-full h-full object-cover brightness-100"
+              loading="eager"
             />
           </motion.div>
         </AnimatePresence>

@@ -22,15 +22,13 @@ const Cart = () => {
   });
   
   const generateInstagramMessage = () => {
-    let message = `🍰 New Order from ${customerName || 'Customer'}\n\n`;
-    message += `📦 Items:\n`;
-    items.forEach(item => {
-      message += `- ${item.name} x${item.quantity} (€${(item.price * item.quantity).toFixed(2)})\n`;
-    });
-    message += `\n💰 Total: €${total.toFixed(2)}\n`;
-    message += `📍 ${deliveryMethod === 'pickup' ? 'Pickup' : 'Delivery'}\n`;
-    message += `📞 Phone: ${customerPhone}\n`;
-    return encodeURIComponent(message);
+    const itemsList = items.map(item => 
+      `${item.name} x${item.quantity}`
+    ).join(', ');
+    
+    const message = `Hey! 😊\n\nI'd like to order: ${itemsList}\n\nTotal: €${total.toFixed(2)}\n${deliveryMethod === 'pickup' ? 'Pickup' : 'Delivery'}\n\nName: ${customerName}\nPhone: ${customerPhone}\n\nIs this available? Thank you! ✨`;
+    
+    return message;
   };
   
   const handleSendInstagram = () => {
@@ -39,12 +37,17 @@ const Cart = () => {
       return;
     }
     const message = generateInstagramMessage();
-    // Try to open Instagram app or web
-    const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
-    window.open(instagramUrl, '_blank');
-    // Also copy message to clipboard as fallback
-    navigator.clipboard.writeText(decodeURIComponent(message));
-    alert('Order details copied to clipboard! Please paste it in Instagram chat.');
+    
+    // Copy message to clipboard
+    navigator.clipboard.writeText(message).then(() => {
+      // Try to open Instagram DMs
+      const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
+      window.open(instagramUrl, '_blank');
+      
+      alert('✅ Message copied to clipboard! Paste it in the Instagram chat that just opened.');
+    }).catch(() => {
+      alert('Please copy your order details manually and send to @ingridbakes.cy on Instagram');
+    });
   };
 
   if (items.length === 0) {

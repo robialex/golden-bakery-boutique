@@ -39,19 +39,14 @@ const Hero = () => {
           style={{ scale: titleScale, opacity: titleOpacity }}
         >
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.4, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold px-4"
             style={{ 
               letterSpacing: '0.05em',
-              textShadow: '0 0 30px rgba(198, 161, 54, 0.5), 0 4px 20px rgba(0, 0, 0, 0.3)',
               lineHeight: '1.2',
-              color: '#C6A136',
-              background: 'linear-gradient(135deg, #C6A136 0%, #D4B458 50%, #C6A136 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
+              color: '#C6A136'
             }}
           >
             Ingrid Bakes
