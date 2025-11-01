@@ -98,15 +98,20 @@ const Menu = () => {
           </motion.div>
         </motion.div>
 
-        {/* Category Previews */}
+        {/* Category Previews with enhanced animations */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {filteredCategories.map((categoryGroup, index) => (
             <motion.div
               key={categoryGroup.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: index * 0.08,
+                ease: [0.22, 1, 0.36, 1]
+              }}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
               <CategoryPreview
                 category={categoryGroup.name}
@@ -117,37 +122,37 @@ const Menu = () => {
           ))}
         </div>
 
-        {/* Important Information */}
+        {/* Important Information - Compact */}
         <motion.section
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mt-20 bg-[#1B2C4B] text-white rounded-2xl p-8 md:p-12 shadow-lift border-2 border-primary"
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mt-16 bg-[#1B2C4B] text-white rounded-xl p-5 md:p-8 shadow-lift border border-primary/50"
         >
-          <h2 className="text-3xl font-display font-bold mb-6 text-center">
+          <h2 className="text-xl md:text-2xl font-display font-bold mb-4 text-center">
             Important Information
           </h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto text-sm">
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Serving Guide</h3>
-              <ul className="space-y-2 text-white/90">
+              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Serving Guide</h3>
+              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
                 <li>• 1kg cake serves ~10 people</li>
                 <li>• Small gatherings: 150g per person</li>
                 <li>• Weddings: 50g per person</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Ordering</h3>
-              <ul className="space-y-2 text-white/90">
+              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Ordering</h3>
+              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
                 <li>• Order 48 hours in advance</li>
                 <li>• 50% advance payment required</li>
                 <li>• Cake design charged extra</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-3 text-primary">Delivery</h3>
-              <ul className="space-y-2 text-white/90">
+              <h3 className="text-base md:text-lg font-semibold mb-2 text-primary">Delivery</h3>
+              <ul className="space-y-1 text-white/85 text-xs md:text-sm">
                 <li>• Delivery available (fee applies)</li>
                 <li>• Tall cakes: extra packaging fee</li>
                 <li>• Prices may change without notice</li>

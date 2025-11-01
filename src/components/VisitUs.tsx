@@ -1,69 +1,94 @@
 import { motion } from 'framer-motion';
 import { MapPin, Clock, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { MapEmbed } from './MapEmbed';
 
 export const VisitUs = () => {
   return (
-    <section className="py-8 md:py-12 bg-[#F8F5EC] border-t border-primary/20">
+    <section className="py-10 md:py-16 bg-[#F5F1E6] border-t border-primary/20">
       <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-8 md:mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-[#1B2C4B] mb-2">
+            Visit Us
+          </h2>
+        </motion.div>
+
+        {/* Compact info cards on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto mb-8"
         >
-          <div className="bg-card rounded-xl p-4 md:p-8 shadow-md border-t-2 border-primary/40">
-            <h2 className="text-xl md:text-3xl font-display font-bold text-card-foreground text-center mb-4 md:mb-6">
-              Visit <span className="text-primary">Us</span>
-            </h2>
-            
-            <div className="grid grid-cols-3 gap-3 md:gap-6 text-center">
-              {/* Location */}
-              <Link 
-                to="/contact"
-                className="group flex flex-col items-center gap-1 md:gap-2 p-2 md:p-3 rounded-lg hover:bg-primary/5 transition-all duration-300"
-              >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:shadow-gold transition-all duration-300">
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary group-hover:text-background transition-colors duration-300" />
-                </div>
-                <div>
-                  <h3 className="text-xs md:text-sm font-semibold text-card-foreground mb-0.5">Location</h3>
-                  <p className="text-[10px] md:text-xs text-muted-foreground">Nicosia</p>
-                </div>
-              </Link>
-
-              {/* Opening Hours */}
-              <div className="flex flex-col items-center gap-1 md:gap-2 p-2 md:p-3">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary flex items-center justify-center">
-                  <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-xs md:text-sm font-semibold text-card-foreground mb-0.5 md:mb-1">Hours</h3>
-                  <div className="text-[9px] md:text-xs text-muted-foreground space-y-0.5">
-                    <p>Mon–Fri: 8:30–19:00</p>
-                    <p className="hidden md:block">Sat: 9:00–19:30</p>
-                    <p className="hidden md:block">Sun: 9:00–19:00</p>
-                    <p className="md:hidden">Sat–Sun: 9:00–19:30</p>
-                  </div>
-                </div>
+          {/* Location */}
+          <Link 
+            to="/contact" 
+            className="bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-primary/10 group"
+          >
+            <div className="flex flex-col items-center text-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-1 group-hover:bg-primary/20 transition-colors">
+                <MapPin className="w-5 h-5 md:w-6 md:h-6 text-primary" />
               </div>
+              <h3 className="text-base md:text-lg font-display font-semibold text-[#1B2C4B]">
+                Location
+              </h3>
+              <p className="text-xs md:text-sm text-[#1B2C4B]/70 leading-snug">
+                97 Nikou Pattichi, Strovolos, Nicosia 2060
+              </p>
+            </div>
+          </Link>
 
-              {/* Phone */}
-              <a 
-                href="tel:+35799123456"
-                className="group flex flex-col items-center gap-1 md:gap-2 p-2 md:p-3 rounded-lg hover:bg-primary/5 transition-all duration-300"
-              >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-primary flex items-center justify-center group-hover:bg-primary group-hover:shadow-gold transition-all duration-300">
-                  <Phone className="h-4 w-4 md:h-5 md:w-5 text-primary group-hover:text-background transition-colors duration-300" />
-                </div>
-                <div>
-                  <h3 className="text-xs md:text-sm font-semibold text-card-foreground mb-0.5">Call Us</h3>
-                  <p className="text-[10px] md:text-xs text-muted-foreground">Get in touch</p>
-                </div>
-              </a>
+          {/* Opening Hours */}
+          <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm border border-primary/10">
+            <div className="flex flex-col items-center text-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-1">
+                <Clock className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+              </div>
+              <h3 className="text-base md:text-lg font-display font-semibold text-[#1B2C4B]">
+                Opening Hours
+              </h3>
+              <p className="text-xs md:text-sm text-[#1B2C4B]/70 leading-snug">
+                Mon-Sat: 9:00 AM - 6:00 PM<br />
+                Sunday: Closed
+              </p>
             </div>
           </div>
+
+          {/* Phone */}
+          <a 
+            href="tel:+35799659496" 
+            className="bg-white rounded-xl p-4 md:p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-primary/10 group"
+          >
+            <div className="flex flex-col items-center text-center gap-2">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-1 group-hover:bg-primary/20 transition-colors">
+                <Phone className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+              </div>
+              <h3 className="text-base md:text-lg font-display font-semibold text-[#1B2C4B]">
+                Phone
+              </h3>
+              <p className="text-xs md:text-sm text-[#1B2C4B]/70 leading-snug">
+                +357 99 659496
+              </p>
+            </div>
+          </a>
+        </motion.div>
+
+        {/* Map embed */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="max-w-4xl mx-auto"
+        >
+          <MapEmbed />
         </motion.div>
       </div>
     </section>
