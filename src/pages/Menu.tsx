@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Search } from 'lucide-react';
 import { CategoryPreview } from '@/components/CategoryPreview';
 import menuData from '@/data/menu.json';
 
 const Menu = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
   // Get unique categories
   const categories = Array.from(new Set(menuData.products.map(p => p.category)));
 
@@ -12,6 +16,14 @@ const Menu = () => {
     name: category,
     products: menuData.products.filter(p => p.category === category)
   }));
+
+  // Filter categories based on search
+  const filteredCategories = productsByCategory.filter(categoryGroup =>
+    categoryGroup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    categoryGroup.products.some(p => 
+      p.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
 
   return (
     <div 
@@ -52,11 +64,30 @@ const Menu = () => {
             Handcrafted desserts made with premium ingredients and Mediterranean love
           </motion.p>
           
+          {/* Search/Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="max-w-md mx-auto mb-6"
+          >
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/60" />
+              <input
+                type="text"
+                placeholder="Search categories or items..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              />
+            </div>
+          </motion.div>
+          
           {/* Quick Link to Vegetarian */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
             <Link 
               to="/menu/vegetarian"
@@ -68,8 +99,8 @@ const Menu = () => {
         </motion.div>
 
         {/* Category Previews */}
-        <div className="space-y-8">
-          {productsByCategory.map((categoryGroup, index) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {filteredCategories.map((categoryGroup, index) => (
             <motion.div
               key={categoryGroup.name}
               initial={{ opacity: 0, y: 40 }}

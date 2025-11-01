@@ -41,63 +41,54 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={`py-12 rounded-2xl ${
-        index % 2 === 0 ? 'bg-card' : 'bg-background-secondary'
-      }`}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5 }}
+      className="bg-card rounded-xl overflow-hidden shadow-card hover:shadow-lift transition-all duration-300 border border-primary/10"
     >
-      <div className="container mx-auto px-4">
-        {/* Category Header */}
-        <h3 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-6">
+      {/* Category Name - Always visible at top */}
+      <div className="bg-gradient-to-r from-[#1B2C4B] to-[#1B2C4B]/90 px-3 py-2 border-b border-primary/20">
+        <h3 className="text-base md:text-lg font-display font-semibold text-white text-center">
           {category}
         </h3>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          {/* Left: Rotating Preview Images */}
-          <div className="relative h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg">
-            {previewImages.map((product, idx) => (
-              <motion.img
-                key={product.id}
-                src={product.image}
-                alt={product.name}
-                className="absolute inset-0 w-full h-full object-cover"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
-                transition={{ duration: 1 }}
-                loading="lazy"
-              />
-            ))}
-            <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent" />
-          </div>
+      {/* Rotating Preview Images */}
+      <div className="relative h-32 md:h-48 overflow-hidden">
+        {previewImages.map((product, idx) => (
+          <motion.img
+            key={product.id}
+            src={product.image}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            loading="lazy"
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 to-transparent" />
+      </div>
 
-          {/* Right: Highlighted Item */}
-          <div className="flex flex-col justify-center">
-            <div className="bg-card/50 backdrop-blur-sm rounded-2xl p-6 border-2 border-primary/20">
-              <h4 className="text-2xl font-display font-semibold text-foreground mb-3">
-                {highlightedProduct.name}
-              </h4>
-              <p className="text-muted-foreground mb-4">
-                {highlightedProduct.description}
-              </p>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-3xl font-display font-bold text-primary">
-                  €{highlightedProduct.price > 0 ? highlightedProduct.price.toFixed(2) : 'Ask'}
-                </span>
-                {highlightedProduct.unit && (
-                  <span className="text-sm text-muted-foreground">{highlightedProduct.unit}</span>
-                )}
-              </div>
-              <Link to={`/menu/${categorySlug}`}>
-                <LuxuryButton variant="secondary" size="md" className="w-full">
-                  See More
-                </LuxuryButton>
-              </Link>
-            </div>
-          </div>
+      {/* Product Info */}
+      <div className="p-3 md:p-4">
+        <h4 className="text-sm md:text-base font-display font-semibold text-foreground mb-1 line-clamp-1">
+          {highlightedProduct.name}
+        </h4>
+        <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
+          {highlightedProduct.description}
+        </p>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-lg md:text-xl font-display font-bold text-primary">
+            €{highlightedProduct.price > 0 ? highlightedProduct.price.toFixed(2) : 'Ask'}
+          </span>
         </div>
+        <Link to={`/menu/${categorySlug}`}>
+          <LuxuryButton variant="secondary" size="sm" className="w-full text-xs md:text-sm">
+            See More
+          </LuxuryButton>
+        </Link>
       </div>
     </motion.div>
   );
