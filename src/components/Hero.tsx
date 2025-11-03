@@ -1,5 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import heroImage from '@/assets/hero-bakery.jpg';
+import { Link } from 'react-router-dom';
+import { LuxuryButton } from './LuxuryButton';
+import heroImage from '@/assets/hero-bakery-new.jpg';
 
 const Hero = () => {
   const { scrollY } = useScroll();
@@ -33,27 +35,39 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/90" />
         </motion.div>
 
-        {/* Title - Cinematic Animated Text */}
+        {/* Title & CTA */}
         <motion.div 
-          className="relative z-10 text-center px-6 w-full max-w-6xl mx-auto"
+          className="relative z-10 text-center px-4 w-full max-w-6xl mx-auto"
           style={{ scale: titleScale, opacity: titleOpacity }}
         >
-            <motion.h1
+          <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-display font-bold px-4"
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold px-2 mb-6"
             style={{ 
               letterSpacing: '0.05em',
               lineHeight: '1.2',
-              background: 'linear-gradient(135deg, #C6A136 0%, #D4AF37 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
+              color: '#C6A136'
             }}
           >
             Ingrid Bakes
           </motion.h1>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Link to="/menu">
+              <LuxuryButton 
+                size="lg" 
+                className="text-base md:text-lg px-8 md:px-12 h-12 md:h-14 min-w-[160px]"
+              >
+                View Menu
+              </LuxuryButton>
+            </Link>
+          </motion.div>
         </motion.div>
       </section>
 

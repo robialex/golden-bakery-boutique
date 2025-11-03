@@ -23,10 +23,10 @@ const Cart = () => {
   
   const generateInstagramMessage = () => {
     const itemsList = items.map(item => 
-      `${item.name} x${item.quantity}`
-    ).join(', ');
+      `${item.quantity} x ${item.name} — €${(item.price * item.quantity).toFixed(2)}`
+    ).join('\n');
     
-    const message = `Hey! 😊\n\nI'd love to order:\n${itemsList}\n\nTotal: €${total.toFixed(2)}\n${deliveryMethod === 'pickup' ? '📦 Pickup' : '🚚 Delivery'}\n\nName: ${customerName}\nPhone: ${customerPhone}\n\nIs this available? Thank you!`;
+    const message = `Hey Ingrid Bakes! 😊\n\nI'd like to order:\n\n${itemsList}\n\n${deliveryMethod === 'pickup' ? '📦 Pickup' : '🚚 Delivery'}\n\nName: ${customerName}\nPhone: ${customerPhone}\n\nTotal: €${total.toFixed(2)}\n\nIs this available? Thanks!`;
     
     return message;
   };
@@ -36,20 +36,26 @@ const Cart = () => {
       alert('Please fill in your name and phone number');
       return;
     }
+    
     const message = generateInstagramMessage();
     
-    // Copy message to clipboard
+    // Copy to clipboard
     navigator.clipboard.writeText(message).then(() => {
-      // Show success message
-      alert('✅ Your order has been copied to clipboard!\n\nNow paste it into the DMs with @ingridbakes.cy.');
+      alert('✅ Message copied to clipboard!\n\nOpening Instagram... Paste your order into DMs with @ingridbakes.cy');
       
-      // Open Instagram DMs directly
+      // Try app deep-link first, fallback to web
       setTimeout(() => {
-        const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
-        window.open(instagramUrl, '_blank');
-      }, 500);
+        const deepLink = 'instagram://user?username=ingridbakes.cy';
+        const webFallback = 'https://www.instagram.com/ingridbakes.cy';
+        
+        window.location.href = deepLink;
+        
+        setTimeout(() => {
+          window.open(webFallback, '_blank');
+        }, 1500);
+      }, 300);
     }).catch(() => {
-      alert('Please copy your order details manually and send to @ingridbakes.cy on Instagram');
+      alert('Unable to copy. Please manually message @ingridbakes.cy on Instagram with your order details.');
     });
   };
 
@@ -171,7 +177,7 @@ const Cart = () => {
 
                 {hasCakesOnly && (
                   <div className="space-y-4 mb-6 pb-6 border-b border-border">
-                    <h3 className="font-semibold text-foreground">Order via Instagram</h3>
+                    <h3 className="font-semibold text-foreground text-sm md:text-base">Order via Instagram</h3>
                     <input
                       type="text"
                       placeholder="Your Name"
@@ -210,20 +216,17 @@ const Cart = () => {
                     </div>
                     <LuxuryButton
                       size="lg"
-                      className="w-full"
+                      className="w-full text-sm md:text-base"
                       onClick={handleSendInstagram}
                       disabled={!customerName || !customerPhone}
                     >
                       Send Order on Instagram
                     </LuxuryButton>
+                    <p className="text-xs text-muted-foreground text-center mt-2">
+                      Message will be copied — paste it in Instagram DMs
+                    </p>
                   </div>
                 )}
-
-                <Link to="/order" className="block">
-                  <LuxuryButton size="lg" className="w-full" variant="secondary">
-                    Proceed to Checkout
-                  </LuxuryButton>
-                </Link>
 
                 <Link to="/menu" className="block mt-4">
                   <LuxuryButton variant="ghost" size="md" className="w-full">
