@@ -26,7 +26,7 @@ const Cart = () => {
       `${item.name} x${item.quantity}`
     ).join(', ');
     
-    const message = `Hey! 😊\n\nI'd like to order: ${itemsList}\n\nTotal: €${total.toFixed(2)}\n${deliveryMethod === 'pickup' ? 'Pickup' : 'Delivery'}\n\nName: ${customerName}\nPhone: ${customerPhone}\n\nIs this available? Thank you! ✨`;
+    const message = `Hey! 😊\n\nI'd love to order:\n${itemsList}\n\nTotal: €${total.toFixed(2)}\n${deliveryMethod === 'pickup' ? '📦 Pickup' : '🚚 Delivery'}\n\nName: ${customerName}\nPhone: ${customerPhone}\n\nIs this available? Thank you!`;
     
     return message;
   };
@@ -40,11 +40,14 @@ const Cart = () => {
     
     // Copy message to clipboard
     navigator.clipboard.writeText(message).then(() => {
-      // Try to open Instagram DMs
-      const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
-      window.open(instagramUrl, '_blank');
+      // Show success message
+      alert('✅ Your order has been copied to clipboard!\n\nNow paste it into the DMs with @ingridbakes.cy.');
       
-      alert('✅ Message copied to clipboard! Paste it in the Instagram chat that just opened.');
+      // Open Instagram DMs directly
+      setTimeout(() => {
+        const instagramUrl = `https://www.instagram.com/direct/t/ingridbakes.cy`;
+        window.open(instagramUrl, '_blank');
+      }, 500);
     }).catch(() => {
       alert('Please copy your order details manually and send to @ingridbakes.cy on Instagram');
     });
@@ -218,7 +221,7 @@ const Cart = () => {
 
                 <Link to="/order" className="block">
                   <LuxuryButton size="lg" className="w-full" variant="secondary">
-                    {hasCakesOnly ? 'Or Checkout Online' : 'Proceed to Checkout'}
+                    Proceed to Checkout
                   </LuxuryButton>
                 </Link>
 

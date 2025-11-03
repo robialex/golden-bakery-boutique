@@ -27,10 +27,24 @@ const Home = () => {
         </div>
       </motion.section>
 
-      <div id="featured">
+      <motion.div 
+        id="featured"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+      >
         <AsymmetricalGallery />
-      </div>
-      <VisitUs />
+      </motion.div>
+      
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <VisitUs />
+      </motion.div>
     </div>
   );
 };
