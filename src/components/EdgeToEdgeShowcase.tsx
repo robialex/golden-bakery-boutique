@@ -1,23 +1,24 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import bdayCakes2 from '@/assets/gallery/bday-cakes-2.jpg';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import birthdayCakes from '@/assets/gallery/birthday-cakes.jpg';
-import blueberry2 from '@/assets/gallery/blueberry-2.jpg';
+import bdayCakes2 from '@/assets/gallery/bday-cakes-2.jpg';
 import blueberry from '@/assets/gallery/blueberry.jpg';
+import blueberry2 from '@/assets/gallery/blueberry-2.jpg';
 import heartPecan from '@/assets/gallery/heart-pecan-cake.jpg';
 import vitrina from '@/assets/gallery/vitrina.jpg';
 import showcasingCakes from '@/assets/gallery/showcasing-cakes.jpg';
 import showcasingBakes from '@/assets/gallery/showcasing-bakes.jpg';
 
 const images = [
-  { src: birthdayCakes, alt: 'Ingrid Bakes beautiful birthday cakes display' },
-  { src: bdayCakes2, alt: 'Artisan chocolate petit fours with elegant decoration' },
-  { src: blueberry, alt: 'Fresh blueberry tarts with vanilla cream' },
-  { src: vitrina, alt: 'Ingrid Bakes boutique café display case' },
-  { src: showcasingCakes, alt: 'Selection of premium handcrafted cakes' },
-  { src: heartPecan, alt: 'Heart-shaped pecan tart' },
-  { src: blueberry2, alt: 'Blueberry tarts on elegant vintage plates' },
-  { src: showcasingBakes, alt: 'Artisan pastries and savory bakes' },
+  { src: birthdayCakes, alt: "Birthday celebration cakes" },
+  { src: bdayCakes2, alt: "Custom birthday cakes" },
+  { src: blueberry, alt: "Blueberry dessert" },
+  { src: blueberry2, alt: "Blueberry cake creation" },
+  { src: heartPecan, alt: "Heart-shaped pecan cake" },
+  { src: vitrina, alt: "Bakery display case" },
+  { src: showcasingCakes, alt: "Showcase of artisan cakes" },
+  { src: showcasingBakes, alt: "Fresh baked goods" },
 ];
 
 export const EdgeToEdgeShowcase = () => {
@@ -27,11 +28,11 @@ export const EdgeToEdgeShowcase = () => {
   useEffect(() => {
     if (isPaused) return;
     
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 5500);
+    }, 5000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, [isPaused]);
 
   const goToSlide = (index: number) => {
@@ -40,86 +41,149 @@ export const EdgeToEdgeShowcase = () => {
     setTimeout(() => setIsPaused(false), 10000);
   };
 
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <section 
-      className="relative w-full bg-background"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* Desktop: Two images side by side */}
-      <div className="hidden md:grid md:grid-cols-2 gap-0 w-full">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`left-${currentIndex}`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 20 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative h-[50vh] md:h-[60vh] overflow-hidden"
-          >
-            <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].alt}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`right-${currentIndex}`}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="relative h-[50vh] md:h-[60vh] overflow-hidden mt-0 md:mt-12"
-          >
-            <img
-              src={images[(currentIndex + 1) % images.length].src}
-              alt={images[(currentIndex + 1) % images.length].alt}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </motion.div>
-        </AnimatePresence>
+    <section className="relative w-full bg-background py-12 md:py-16">
+      <div className="container mx-auto px-4 mb-8">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-4xl font-display font-bold text-center mb-2"
+        >
+          Featured <span className="text-primary">Creations</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-center text-muted-foreground"
+        >
+          Discover our handcrafted masterpieces
+        </motion.p>
       </div>
 
-      {/* Mobile: Single image */}
-      <div className="md:hidden relative h-[45vh] overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`mobile-${currentIndex}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="w-full h-full"
-          >
-            <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].alt}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
-          </motion.div>
-        </AnimatePresence>
+      {/* Desktop: Scattered masonry layout */}
+      <div className="hidden md:block relative w-full px-0" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+        <div className="relative h-[600px] w-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`img1-${currentIndex}`}
+              initial={{ opacity: 0, y: -30, x: -30 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, y: 30, x: 30 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="absolute top-0 left-0 w-[55%] h-[380px] shadow-xl"
+            >
+              <img
+                src={images[currentIndex].src}
+                alt={images[currentIndex].alt}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+              />
+            </motion.div>
+          </AnimatePresence>
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`img2-${currentIndex}`}
+              initial={{ opacity: 0, y: 30, x: 30 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, y: -30, x: -30 }}
+              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+              className="absolute bottom-0 right-0 w-[48%] h-[320px] shadow-xl"
+            >
+              <img
+                src={images[(currentIndex + 1) % images.length].src}
+                alt={images[(currentIndex + 1) % images.length].alt}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Arrow Navigation - Desktop */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="w-6 h-6 text-foreground" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-3 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Next image"
+        >
+          <ChevronRight className="w-6 h-6 text-foreground" />
+        </button>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-sm">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentIndex || index === (currentIndex + 1) % images.length
-                ? 'w-8 h-2 bg-primary'
-                : 'w-2 h-2 bg-muted-foreground/40 hover:bg-muted-foreground/60'
-            }`}
-            aria-label={`Go to image ${index + 1}`}
-          />
-        ))}
+      {/* Mobile: Two smaller images scattered */}
+      <div className="md:hidden relative w-full px-4">
+        <div className="relative h-[400px] w-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`mobile-img1-${currentIndex}`}
+              initial={{ opacity: 0, scale: 0.9, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.7, ease: "easeInOut" }}
+              className="absolute top-0 left-0 w-[58%] h-[240px] shadow-lg"
+            >
+              <img
+                src={images[currentIndex].src}
+                alt={images[currentIndex].alt}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+              />
+            </motion.div>
+          </AnimatePresence>
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`mobile-img2-${currentIndex}`}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: -20 }}
+              transition={{ duration: 0.7, ease: "easeInOut", delay: 0.15 }}
+              className="absolute bottom-0 right-0 w-[55%] h-[200px] shadow-lg"
+            >
+              <img
+                src={images[(currentIndex + 1) % images.length].src}
+                alt={images[(currentIndex + 1) % images.length].alt}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Arrow Navigation - Mobile */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-2 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="w-5 h-5 text-foreground" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/80 hover:bg-background p-2 rounded-full shadow-lg transition-all duration-300 z-10"
+          aria-label="Next image"
+        >
+          <ChevronRight className="w-5 h-5 text-foreground" />
+        </button>
       </div>
     </section>
   );
