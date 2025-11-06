@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Home = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-20 md:pb-0">
       <Hero />
 
       <motion.div 
