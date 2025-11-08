@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -13,8 +13,28 @@ const navLinks = [
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const totalItems = useCartStore((state) => state.getTotalItems());
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show button when scrolling up, hide when scrolling down
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <>
@@ -101,24 +121,29 @@ export const Header = () => {
     </header>
 
     {/* Mobile Sticky Bottom Bar - Order on Instagram */}
-    <motion.div 
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.4 }}
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-secondary/98 border-t border-primary/30 shadow-[0_-4px_20px_rgba(0,0,0,0.12)]"
-      style={{ backdropFilter: 'blur(6px)', paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
-    >
-      <div className="container mx-auto px-4 py-3">
-        <a
-          href="https://www.instagram.com/ingridbakes.cy"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full bg-primary hover:bg-primary-hover text-primary-foreground font-semibold py-3.5 rounded-xl shadow-gold transition-all duration-300 hover:scale-[1.02] text-center min-h-[48px] flex items-center justify-center"
+    <AnimatePresence>
+      {showButton && (
+        <motion.div 
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="md:hidden fixed bottom-0 left-0 right-0 z-40"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
         >
-          Order on Instagram
-        </a>
-      </div>
-    </motion.div>
+          <div className="container mx-auto px-4 pb-3">
+            <a
+              href="https://www.instagram.com/ingridbakes.cy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-12 bg-[#C6A136] text-white font-medium text-base rounded-xl shadow-[0_4px_16px_rgba(198,161,54,0.3)] hover:shadow-[0_6px_24px_rgba(198,161,54,0.5)] transition-all duration-300 hover:scale-[1.02] flex items-center justify-center"
+            >
+              Order on Instagram
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
     </>
   );
 };
