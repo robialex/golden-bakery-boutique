@@ -31,7 +31,7 @@ const Hero = () => {
             className="w-full h-full bg-cover"
             style={{ 
               backgroundImage: `url(${heroImage})`,
-              backgroundPosition: 'center 10%',
+              backgroundPosition: 'center 0%',
               objectFit: 'cover'
             }}
           />
