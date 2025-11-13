@@ -85,9 +85,9 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
           </span>
         </div>
         <Link to={`/menu/${categorySlug}`}>
-          <LuxuryButton variant="secondary" size="sm" className="w-full text-xs md:text-sm">
+          <button className="w-full h-9 px-4 bg-[#C6A136] text-white rounded-xl font-semibold text-xs md:text-sm shadow-[0_2px_8px_rgba(198,161,54,0.2)] hover:shadow-[0_0_10px_rgba(198,161,54,0.4)] hover:scale-[1.03] transition-all duration-300">
             See More
-          </LuxuryButton>
+          </button>
         </Link>
       </div>
     </motion.div>

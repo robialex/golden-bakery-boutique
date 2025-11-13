@@ -27,39 +27,41 @@ const Menu = () => {
 
   return (
     <div 
-      className="min-h-screen pt-24 pb-20" 
-      style={{
-        background: 'linear-gradient(180deg, #1B2C4B 0%, #F5F1E6 30%)',
-      }}
+      className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]"
     >
+      {/* Subtle paper texture overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30" 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]" 
         style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.03) 35px, rgba(198, 161, 54, 0.03) 70px)`
+          backgroundImage: `
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px),
+            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px)
+          `,
+          backgroundSize: '40px 40px'
         }}
       />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="text-center mb-12"
         >
           <motion.h1 
-            className="text-5xl md:text-6xl font-display font-bold text-white mb-6"
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Our <span className="text-primary">Menu</span>
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-white/90 max-w-3xl mx-auto mb-8"
+            className="text-5xl md:text-6xl font-display font-semibold text-[#1B2C4B] mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Our Menu
+          </motion.h1>
+          <motion.p 
+            className="text-lg md:text-xl text-[#1B2C4B]/85 max-w-3xl mx-auto mb-8 leading-relaxed"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             Handcrafted desserts made with premium ingredients and Mediterranean love
           </motion.p>
@@ -68,17 +70,17 @@ const Menu = () => {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="max-w-md mx-auto mb-6"
           >
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/60" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1B2C4B]/60" />
               <input
                 type="text"
                 placeholder="Search categories or items..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                className="w-full pl-10 pr-4 py-3 bg-white border-2 border-[#1B2C4B]/10 rounded-xl text-[#1B2C4B] placeholder:text-[#1B2C4B]/50 focus:outline-none focus:border-[#C6A136] focus:ring-2 focus:ring-[#C6A136]/20 transition-all"
               />
             </div>
           </motion.div>
@@ -87,11 +89,11 @@ const Menu = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
             <Link 
               to="/menu/vegetarian"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-xl font-semibold hover:shadow-gold hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#C6A136] text-white rounded-xl font-semibold shadow-[0_4px_12px_rgba(198,161,54,0.25)] hover:shadow-[0_0_12px_rgba(198,161,54,0.5)] hover:scale-[1.03] transition-all duration-300"
             >
               View Vegetarian Options
             </Link>
