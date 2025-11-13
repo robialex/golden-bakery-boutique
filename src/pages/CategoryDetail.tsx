@@ -50,15 +50,17 @@ const CategoryDetail = () => {
 
   return (
     <div 
-      className="min-h-screen pt-24 pb-20"
-      style={{
-        background: 'linear-gradient(180deg, #1B2C4B 0%, #F5F1E6 20%)',
-      }}
+      className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]"
     >
+      {/* Subtle paper texture overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30" 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]" 
         style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.03) 35px, rgba(198, 161, 54, 0.03) 70px)`
+          backgroundImage: `
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px),
+            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px)
+          `,
+          backgroundSize: '40px 40px'
         }}
       />
       
@@ -72,7 +74,7 @@ const CategoryDetail = () => {
         >
           <Link 
             to="/menu"
-            className="inline-flex items-center gap-2 text-white hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-[#1B2C4B] hover:text-[#C6A136] transition-colors"
           >
             <ArrowLeft className="h-5 w-5" />
             <span className="font-medium">Back to Menu</span>
@@ -86,10 +88,10 @@ const CategoryDetail = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+          <h1 className="text-4xl md:text-5xl font-display font-semibold text-[#1B2C4B] mb-3">
             {categoryName}
           </h1>
-          <p className="text-lg text-white/90">
+          <p className="text-lg text-[#1B2C4B]/85">
             Explore our {products.length} handcrafted {categoryName?.toLowerCase()}
           </p>
         </motion.div>

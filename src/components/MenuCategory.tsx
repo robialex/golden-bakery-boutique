@@ -101,7 +101,7 @@ export const MenuCategory = ({ category, products, index }: MenuCategoryProps) =
                 <div className="text-center">
                   <button
                     onClick={() => setIsExpanded(true)}
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#1B2C4B] text-white rounded-xl border border-primary/30 hover:border-primary hover:shadow-gold transition-all duration-300 font-medium"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#C6A136] text-white rounded-xl font-semibold shadow-[0_4px_12px_rgba(198,161,54,0.25)] hover:shadow-[0_0_12px_rgba(198,161,54,0.5)] hover:scale-[1.03] transition-all duration-300"
                   >
                     See More
                     <ChevronDown className="h-4 w-4" />
