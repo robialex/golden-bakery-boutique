@@ -15,6 +15,7 @@ export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isDarkBg, setIsDarkBg] = useState(false);
   const location = useLocation();
   const totalItems = useCartStore((state) => state.getTotalItems());
 
@@ -30,6 +31,29 @@ export const Header = () => {
       }
       
       setLastScrollY(currentScrollY);
+      
+      // Detect background color behind header icons
+      if (window.innerWidth < 1024) {
+        const headerHeight = 80;
+        const rightSideX = window.innerWidth - 60;
+        const elementsAtPoint = document.elementsFromPoint(rightSideX, headerHeight);
+        
+        let bgIsDark = false;
+        for (const el of elementsAtPoint) {
+          const computedStyle = window.getComputedStyle(el);
+          const bgColor = computedStyle.backgroundColor;
+          
+          if (bgColor && bgColor !== 'rgba(0, 0, 0, 0)' && bgColor !== 'transparent') {
+            const rgb = bgColor.match(/\d+/g);
+            if (rgb) {
+              const brightness = (parseInt(rgb[0]) * 299 + parseInt(rgb[1]) * 587 + parseInt(rgb[2]) * 114) / 1000;
+              bgIsDark = brightness < 128;
+              break;
+            }
+          }
+        }
+        setIsDarkBg(bgIsDark);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -69,7 +93,11 @@ export const Header = () => {
           {/* Cart & Mobile Menu */}
           <div className="flex items-center space-x-3 md:space-x-4 ml-4 md:ml-6">
             <Link to="/cart" className="relative p-2 min-h-[44px] min-w-[44px] flex items-center justify-center">
-              <ShoppingCart className="h-6 w-6 text-foreground hover:text-primary transition-colors" />
+              <ShoppingCart 
+                className={`h-6 w-6 hover:text-primary transition-all duration-[180ms] ${
+                  isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'
+                }`} 
+              />
               {totalItems > 0 && (
                 <span className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center shadow-gold">
                   {totalItems}
@@ -80,10 +108,18 @@ export const Header = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-foreground"
+              className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? (
+                <X className={`h-6 w-6 transition-all duration-[180ms] ${
+                  isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'
+                }`} />
+              ) : (
+                <Menu className={`h-6 w-6 transition-all duration-[180ms] ${
+                  isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'
+                }`} />
+              )}
             </button>
           </div>
         </div>
@@ -96,29 +132,36 @@ export const Header = () => {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
+              className="lg:hidden overflow-hidden bg-secondary/98"
             >
-              <div className="pt-4 pb-2 space-y-2">
-                {navLinks.map((link) => (
-                  <Link
+              <div className="py-4 space-y-3">
+                {navLinks.map((link, idx) => (
+                  <motion.div
                     key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-2 rounded-lg transition-colors ${
-                      location.pathname === link.path
-                        ? 'bg-primary text-primary-foreground'
-                        : 'text-secondary-foreground hover:bg-primary/20'
-                    }`}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ delay: idx * 0.08, duration: 0.3 }}
                   >
-                    {link.name}
-                  </Link>
+                    <Link
+                      to={link.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block text-base font-medium py-2 px-1 transition-colors ${
+                        location.pathname === link.path
+                          ? 'text-primary'
+                          : 'text-[#F5F1E6] hover:text-primary'
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
-    </header>
+        </nav>
+      </header>
 
     {/* Mobile Sticky Bottom Bar - Order on Instagram */}
     <AnimatePresence>
