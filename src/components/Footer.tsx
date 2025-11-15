@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 export const Footer = () => {
   return (
     <footer className="relative mt-0">
-      {/* Gradient Transition */}
-      <div className="h-24 bg-gradient-to-b from-[#F5F1E6] to-[#1B2C4B]" />
+      {/* Smooth Gradient Transition */}
+      <div className="h-20 lg:h-24 bg-gradient-to-b from-[#F5F1E6] via-[#d4c5aa] to-[#1B2C4B]" />
       
       {/* Footer Content */}
       <motion.div 
@@ -14,7 +14,7 @@ export const Footer = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="bg-[#1B2C4B] border-t-2 border-[rgba(198,161,54,0.2)] pt-8 pb-8"
+        className="bg-[#1B2C4B] pt-10 pb-8"
       >
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

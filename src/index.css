@@ -8,27 +8,27 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* INGRID BAKES - Luxurious navy, cream, and metallic gold palette */
+    /* INGRID BAKES - Refined boutique palette: navy, warm cream, and authentic gold */
     
     /* Backgrounds */
-    --background: 223 57% 15%; /* Deep navy #0A1D3A for main background */
-    --background-secondary: 44 70% 95%; /* Warm cream #F5F1E6 for sections */
-    --foreground: 44 70% 95%; /* Cream text on navy */
+    --background: 216 67% 15%; /* Rich navy #0F1F35 */
+    --background-secondary: 42 65% 94%; /* Warm cream #F5F0E6 */
+    --foreground: 42 65% 94%; /* Cream text on navy */
     
-    --card: 44 70% 95%; /* Cream for cards #F5F1E6 */
-    --card-foreground: 216 67% 15%; /* Dark navy text on cream */
+    --card: 42 65% 94%; /* Cream for cards */
+    --card-foreground: 216 67% 15%; /* Navy text on cream */
     
-    --popover: 44 70% 95%;
+    --popover: 42 65% 94%;
     --popover-foreground: 216 67% 15%;
     
-    /* Primary - Real metallic gold */
-    --primary: 43 74% 53%; /* #D4AF37 metallic gold */
+    /* Primary - Warm authentic gold */
+    --primary: 43 68% 50%; /* #C6A136 refined gold */
     --primary-foreground: 216 67% 15%; /* Navy text on gold */
-    --primary-hover: 43 60% 45%; /* Rich gold hover #C6A136 */
+    --primary-hover: 43 72% 56%; /* Lighter gold hover #D4AF37 */
     
-    /* Secondary - Deep navy for buttons */
-    --secondary: 216 67% 17%; /* Deep navy #1B2C4B */
-    --secondary-foreground: 44 70% 95%; /* Cream text on navy */
+    /* Secondary - Deep navy */
+    --secondary: 216 67% 17%; /* #1B2C4B */
+    --secondary-foreground: 42 65% 94%; /* Cream text on navy */
     
     --muted: 43 74% 48%;
     --muted-foreground: 216 20% 45%;
