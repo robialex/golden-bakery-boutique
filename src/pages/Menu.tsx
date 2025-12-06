@@ -26,77 +26,91 @@ const Menu = () => {
   );
 
   return (
-    <div className="min-h-screen pt-16 lg:pt-24 pb-24 bg-[#F5F1E6]">
-      <div className="container mx-auto px-4">
-        {/* Header - More compact */}
+    <div 
+      className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]"
+    >
+      {/* Subtle paper texture overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]" 
+        style={{
+          backgroundImage: `
+            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px),
+            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px)
+          `,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-8 lg:mb-12"
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mb-12"
         >
           <motion.h1 
-            className="text-3xl lg:text-5xl font-display font-semibold text-[#1B2C4B] mb-2 lg:mb-3"
+            className="text-5xl md:text-6xl font-display font-semibold text-[#1B2C4B] mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             Our Menu
           </motion.h1>
           <motion.p 
-            className="text-base lg:text-lg text-[#1B2C4B]/70 max-w-2xl mx-auto mb-6"
+            className="text-lg md:text-xl text-[#1B2C4B]/85 max-w-3xl mx-auto mb-8 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Handcrafted desserts made with premium ingredients
+            Handcrafted desserts made with premium ingredients and Mediterranean love
           </motion.p>
           
-          {/* Search */}
+          {/* Search/Filter */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="max-w-md mx-auto mb-5"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="max-w-md mx-auto mb-6"
           >
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1B2C4B]/50" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1B2C4B]/60" />
               <input
                 type="text"
                 placeholder="Search categories or items..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-white border border-[#1B2C4B]/10 rounded-xl text-[#1B2C4B] placeholder:text-[#1B2C4B]/45 focus:outline-none focus:border-[#C6A136] focus:ring-2 focus:ring-[#C6A136]/20 transition-all shadow-[0_2px_8px_rgba(27,44,75,0.04)]"
+                className="w-full pl-10 pr-4 py-3 bg-white border-2 border-[#1B2C4B]/10 rounded-xl text-[#1B2C4B] placeholder:text-[#1B2C4B]/50 focus:outline-none focus:border-[#C6A136] focus:ring-2 focus:ring-[#C6A136]/20 transition-all"
               />
             </div>
           </motion.div>
           
-          {/* Vegetarian Link */}
+          {/* Quick Link to Vegetarian */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.25 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
             <Link 
               to="/menu/vegetarian"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#C6A136] text-white rounded-xl font-semibold text-sm shadow-[0_4px_12px_rgba(198,161,54,0.25)] hover:shadow-[0_6px_20px_rgba(198,161,54,0.4)] hover:-translate-y-0.5 transition-all duration-300"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#C6A136] text-white rounded-xl font-semibold shadow-[0_4px_12px_rgba(198,161,54,0.25)] hover:shadow-[0_0_12px_rgba(198,161,54,0.5)] hover:scale-[1.03] transition-all duration-300"
             >
               View Vegetarian Options
             </Link>
           </motion.div>
         </motion.div>
 
-        {/* Category Grid - Clean white cards */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 lg:gap-5">
+        {/* Category Previews with enhanced animations */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {filteredCategories.map((categoryGroup, index) => (
             <motion.div
               key={categoryGroup.name}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ 
-                duration: 0.5, 
-                delay: index * 0.06,
+                duration: 0.7, 
+                delay: index * 0.1,
                 ease: [0.22, 1, 0.36, 1]
               }}
             >
@@ -109,40 +123,40 @@ const Menu = () => {
           ))}
         </div>
 
-        {/* Important Info - Compact */}
+        {/* Important Information - Compact */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="mt-10 bg-[#1B2C4B] text-white rounded-2xl p-4 lg:p-6 shadow-[0_8px_32px_rgba(27,44,75,0.15)]"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="mt-12 bg-[#1B2C4B] text-white rounded-lg p-4 md:p-6 shadow-md border border-primary/40"
         >
-          <h2 className="text-lg lg:text-xl font-display font-bold mb-4 text-center">
+          <h2 className="text-lg md:text-xl font-display font-bold mb-3 text-center">
             Important Information
           </h2>
-          <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
             <div>
-              <h3 className="text-sm font-semibold mb-2 text-[#C6A136]">Serving Guide</h3>
-              <ul className="space-y-1 text-white/80 text-xs">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Serving Guide</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• 1kg cake serves ~10 people</li>
-                <li>• Small gatherings: 150g/person</li>
-                <li>• Weddings: 50g/person</li>
+                <li>• Small gatherings: 150g per person</li>
+                <li>• Weddings: 50g per person</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-2 text-[#C6A136]">Ordering</h3>
-              <ul className="space-y-1 text-white/80 text-xs">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Ordering</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• Order 48 hours in advance</li>
-                <li>• 50% advance payment</li>
-                <li>• Custom design extra</li>
+                <li>• 50% advance payment required</li>
+                <li>• Cake design charged extra</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold mb-2 text-[#C6A136]">Delivery</h3>
-              <ul className="space-y-1 text-white/80 text-xs">
+              <h3 className="text-sm md:text-base font-semibold mb-1.5 text-primary">Delivery</h3>
+              <ul className="space-y-0.5 text-white/85 text-xs">
                 <li>• Delivery available (fee applies)</li>
-                <li>• Tall cakes: extra packaging</li>
-                <li>• Prices may change</li>
+                <li>• Tall cakes: extra packaging fee</li>
+                <li>• Prices may change without notice</li>
               </ul>
             </div>
           </div>

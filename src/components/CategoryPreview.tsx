@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { LuxuryButton } from './LuxuryButton';
 
 interface Product {
   id: string;
@@ -39,55 +40,56 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
   }, [previewImages.length]);
 
   return (
-    <Link to={`/menu/${categorySlug}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-30px" }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.25 } }}
-        className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(27,44,75,0.06)] hover:shadow-[0_8px_32px_rgba(27,44,75,0.12)] transition-all duration-300"
-      >
-        {/* Image with 3:2 aspect ratio */}
-        <div className="relative aspect-[3/2] overflow-hidden">
-          {previewImages.map((product, idx) => (
-            <motion.img
-              key={product.id}
-              src={product.image}
-              alt={product.name}
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              loading="lazy"
-            />
-          ))}
-          {/* Subtle overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-          
-          {/* Category label on image */}
-          <div className="absolute bottom-3 left-3 right-3">
-            <span className="inline-block px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-lg text-sm font-semibold text-[#1B2C4B]">
-              {category}
-            </span>
-          </div>
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.3 } }}
+      className="bg-card rounded-xl overflow-hidden shadow-card hover:shadow-lift transition-all duration-300 border border-primary/10"
+    >
+      {/* Category Name - Always visible at top */}
+      <div className="bg-gradient-to-r from-[#1B2C4B] to-[#1B2C4B]/90 px-3 py-2 border-b border-primary/20">
+        <h3 className="text-base md:text-lg font-display font-semibold text-white text-center">
+          {category}
+        </h3>
+      </div>
 
-        {/* Product Info - Compact */}
-        <div className="p-3 lg:p-4">
-          <h4 className="text-sm lg:text-base font-display font-semibold text-[#1B2C4B] mb-1 line-clamp-1">
-            {highlightedProduct.name}
-          </h4>
-          <div className="flex items-center justify-between">
-            <span className="text-base lg:text-lg font-display font-bold text-[#C6A136]">
-              €{highlightedProduct.price > 0 ? highlightedProduct.price.toFixed(2) : 'Ask'}
-            </span>
-            <span className="text-xs text-[#1B2C4B]/60">
-              {products.length} items
-            </span>
-          </div>
+      {/* Rotating Preview Images */}
+      <div className="relative h-32 md:h-48 overflow-hidden">
+        {previewImages.map((product, idx) => (
+          <motion.img
+            key={product.id}
+            src={product.image}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover brightness-105"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            loading="lazy"
+          />
+        ))}
+      </div>
+
+      {/* Product Info */}
+      <div className="p-3 md:p-4">
+        <h4 className="text-sm md:text-base font-display font-semibold text-foreground mb-1 line-clamp-1">
+          {highlightedProduct.name}
+        </h4>
+        <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
+          {highlightedProduct.description}
+        </p>
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-lg md:text-xl font-display font-bold text-primary">
+            €{highlightedProduct.price > 0 ? highlightedProduct.price.toFixed(2) : 'Ask'}
+          </span>
         </div>
-      </motion.div>
-    </Link>
+        <Link to={`/menu/${categorySlug}`}>
+          <button className="w-full h-9 px-4 bg-[#C6A136] text-white rounded-xl font-semibold text-xs md:text-sm shadow-[0_2px_8px_rgba(198,161,54,0.2)] hover:shadow-[0_0_10px_rgba(198,161,54,0.4)] hover:scale-[1.03] transition-all duration-300">
+            See More
+          </button>
+        </Link>
+      </div>
+    </motion.div>
   );
 };
