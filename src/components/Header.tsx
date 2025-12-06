@@ -146,10 +146,10 @@ export const Header = () => {
                     <Link
                       to={link.path}
                       onClick={() => setIsOpen(false)}
-                      className={`block text-base font-medium py-2 px-1 transition-colors ${
+                      className={`block text-base font-medium py-2 px-1 transition-colors duration-[180ms] ${
                         location.pathname === link.path
-                          ? 'text-primary'
-                          : 'text-[#F5F1E6] hover:text-primary'
+                          ? 'text-[#C6A136]'
+                          : isDarkBg ? 'text-[#F5F1E6] hover:text-[#C6A136]' : 'text-[#1B2C4B] hover:text-[#C6A136]'
                       }`}
                     >
                       {link.name}
