@@ -1,9 +1,47 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Search } from 'lucide-react';
 import { CategoryPreview } from '@/components/CategoryPreview';
+import { FullWidthShowcase } from '@/components/FullWidthShowcase';
+import { SpecialtyFocusBlock } from '@/components/SpecialtyFocusBlock';
 import menuData from '@/data/menu.json';
+
+// Gallery images for showcases
+import showcasingBakes from '@/assets/gallery/showcasing-bakes.jpg';
+import blueberry from '@/assets/gallery/blueberry.jpg';
+import heartPecan from '@/assets/gallery/heart-pecan-cake.jpg';
+import bdayCakes from '@/assets/gallery/bday-cakes-2.jpg';
+import showcasingCakes from '@/assets/gallery/showcasing-cakes.jpg';
+import vitrina from '@/assets/gallery/vitrina.jpg';
+
+// Showcase images array for rotation
+const showcaseImages = [
+  { src: showcasingBakes, alt: "Handcrafted pastries showcase" },
+  { src: blueberry, alt: "Fresh blueberry dessert" },
+  { src: heartPecan, alt: "Heart-shaped pecan cake" },
+  { src: bdayCakes, alt: "Birthday celebration cakes" },
+  { src: showcasingCakes, alt: "Premium cake collection" },
+  { src: vitrina, alt: "Bakery display" },
+];
+
+// CTA block content
+const ctaBlocks = [
+  {
+    imageSrc: showcasingCakes,
+    headline: "Seasonal Specialties",
+    bodyText: "Discover our handcrafted seasonal creations, made fresh daily with Mediterranean love.",
+    ctaText: "Order on Instagram",
+    ctaLink: "https://www.instagram.com/ingridbakes.cy/"
+  },
+  {
+    imageSrc: heartPecan,
+    headline: "Custom Celebrations",
+    bodyText: "From birthdays to weddings, let us create the perfect centerpiece for your special moments.",
+    ctaText: "Get in Touch",
+    ctaLink: "https://www.instagram.com/ingridbakes.cy/"
+  },
+];
 
 const Menu = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,6 +62,71 @@ const Menu = () => {
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+
+  // Build dynamic content with showcases and CTA blocks interspersed
+  const dynamicContent = useMemo(() => {
+    const content: React.ReactNode[] = [];
+    let showcaseIndex = 0;
+    let ctaIndex = 0;
+    let cardPairCount = 0;
+
+    filteredCategories.forEach((categoryGroup, index) => {
+      // Add category card
+      content.push(
+        <motion.div
+          key={categoryGroup.name}
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ 
+            duration: 0.7, 
+            delay: (index % 4) * 0.08,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          <CategoryPreview
+            category={categoryGroup.name}
+            products={categoryGroup.products}
+            index={index}
+          />
+        </motion.div>
+      );
+
+      cardPairCount++;
+
+      // After every 2 cards, add a Full-Width Showcase (only on mobile/tablet view conceptually)
+      if (cardPairCount === 2 && showcaseIndex < showcaseImages.length) {
+        content.push(
+          <div key={`showcase-${showcaseIndex}`} className="col-span-2 md:col-span-3 lg:col-span-4">
+            <FullWidthShowcase
+              imageSrc={showcaseImages[showcaseIndex].src}
+              alt={showcaseImages[showcaseIndex].alt}
+            />
+          </div>
+        );
+        showcaseIndex++;
+        cardPairCount = 0;
+      }
+
+      // After every 4 cards (2 showcase cycles), add a Specialty Focus Block
+      if (index > 0 && (index + 1) % 4 === 0 && ctaIndex < ctaBlocks.length) {
+        content.push(
+          <div key={`cta-${ctaIndex}`} className="col-span-2 md:col-span-3 lg:col-span-4">
+            <SpecialtyFocusBlock
+              imageSrc={ctaBlocks[ctaIndex].imageSrc}
+              headline={ctaBlocks[ctaIndex].headline}
+              bodyText={ctaBlocks[ctaIndex].bodyText}
+              ctaText={ctaBlocks[ctaIndex].ctaText}
+              ctaLink={ctaBlocks[ctaIndex].ctaLink}
+            />
+          </div>
+        );
+        ctaIndex++;
+      }
+    });
+
+    return content;
+  }, [filteredCategories]);
 
   return (
     <div 
@@ -100,27 +203,9 @@ const Menu = () => {
           </motion.div>
         </motion.div>
 
-        {/* Category Previews with enhanced animations */}
+        {/* Dynamic Category Grid with Showcases and CTAs */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {filteredCategories.map((categoryGroup, index) => (
-            <motion.div
-              key={categoryGroup.name}
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 0.7, 
-                delay: index * 0.1,
-                ease: [0.22, 1, 0.36, 1]
-              }}
-            >
-              <CategoryPreview
-                category={categoryGroup.name}
-                products={categoryGroup.products}
-                index={index}
-              />
-            </motion.div>
-          ))}
+          {dynamicContent}
         </div>
 
         {/* Important Information - Compact */}

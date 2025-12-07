@@ -45,24 +45,25 @@ export const CategoryPreview = ({ category, products, index }: CategoryPreviewPr
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.3 } }}
-      className="bg-card rounded-xl overflow-hidden shadow-card hover:shadow-lift transition-all duration-300 border border-primary/10"
+      whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.2 } }}
+      whileTap={{ scale: 1.02, transition: { duration: 0.12 } }}
+      className="bg-card rounded-xl overflow-hidden shadow-[0_4px_16px_rgba(27,44,75,0.08)] hover:shadow-[0_8px_24px_rgba(27,44,75,0.14)] transition-all duration-300 border border-primary/10 cursor-pointer"
     >
       {/* Category Name - Always visible at top */}
-      <div className="bg-gradient-to-r from-[#1B2C4B] to-[#1B2C4B]/90 px-3 py-2 border-b border-primary/20">
-        <h3 className="text-base md:text-lg font-display font-semibold text-white text-center">
+      <div className="bg-gradient-to-r from-[#1B2C4B] to-[#1B2C4B]/85 px-3 py-2.5 border-b border-[#C6A136]/30">
+        <h3 className="text-base md:text-lg font-display font-semibold text-[#F5F1E6] text-center drop-shadow-sm">
           {category}
         </h3>
       </div>
 
       {/* Rotating Preview Images */}
-      <div className="relative h-32 md:h-48 overflow-hidden">
+      <div className="relative h-36 md:h-48 overflow-hidden">
         {previewImages.map((product, idx) => (
           <motion.img
             key={product.id}
             src={product.image}
             alt={product.name}
-            className="absolute inset-0 w-full h-full object-cover brightness-105"
+            className="absolute inset-0 w-full h-full object-cover brightness-110 saturate-105"
             initial={{ opacity: 0 }}
             animate={{ opacity: idx === currentImageIndex ? 1 : 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
