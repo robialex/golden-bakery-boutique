@@ -132,7 +132,7 @@ const Reviews = () => {
             Enjoyed your visit? We'd love to hear from you!
           </p>
           <motion.a
-            href="https://g.page/r/ingridbakes/review"
+            href="https://search.google.com/local/writereview?placeid=ChIJ-Qt98UYX3hQR9mcnlI2FOzc"
             target="_blank"
             rel="noopener noreferrer"
             whileTap={{ scale: 0.97 }}
