@@ -14,13 +14,6 @@ const Cart = () => {
   const subtotal = getTotalPrice();
   const total = subtotal;
   
-  // Check if cart has only cake items
-  const cakeCategories = ['sponge cakes', 'honey cakes', 'mousse cakes', 'cheesecakes', 'other'];
-  const hasCakesOnly = items.length > 0 && items.every(item => {
-    // Assuming items have category info - if not, this will need adjustment
-    return true; // For now, enable for all items in cart
-  });
-  
   const generateInstagramMessage = () => {
     const itemsList = items.map(item => 
       `${item.quantity} x ${item.name} — €${(item.price * item.quantity).toFixed(2)}`
@@ -39,11 +32,9 @@ const Cart = () => {
     
     const message = generateInstagramMessage();
     
-    // Copy to clipboard
     navigator.clipboard.writeText(message).then(() => {
       alert('✅ Message copied to clipboard!\n\nOpening Instagram... Paste your order into DMs with @ingridbakes.cy');
       
-      // Try app deep-link first, fallback to web
       setTimeout(() => {
         const deepLink = 'instagram://user?username=ingridbakes.cy';
         const webFallback = 'https://www.instagram.com/ingridbakes.cy';
@@ -61,18 +52,18 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen pt-24 pb-20 flex items-center justify-center">
+      <div className="min-h-screen pt-24 pb-20 flex items-center justify-center bg-[#F5F1E6]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+          transition={{ duration: 0.5 }}
+          className="text-center px-4"
         >
-          <ShoppingBag className="h-24 w-24 text-muted-foreground mx-auto mb-6" />
-          <h2 className="text-3xl font-display font-bold text-foreground mb-4">
+          <ShoppingBag className="h-20 w-20 text-[#1B2C4B]/30 mx-auto mb-6" strokeWidth={1.5} />
+          <h2 className="text-2xl lg:text-3xl font-display font-bold text-[#1B2C4B] mb-3">
             Your cart is empty
           </h2>
-          <p className="text-lg text-muted-foreground mb-8">
+          <p className="text-base text-[#1B2C4B]/60 mb-8 max-w-xs mx-auto">
             Discover our delicious creations and add them to your cart
           </p>
           <Link to="/menu">
@@ -84,154 +75,174 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-12">
-            Shopping Cart
+          <h1 className="text-3xl lg:text-4xl font-display font-bold text-[#1B2C4B] mb-2">
+            Your Cart
           </h1>
+          <p className="text-[#1B2C4B]/60 text-sm mb-8">
+            Review your items, then order via Instagram
+          </p>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Cart Items */}
-            <div className="lg:col-span-2 space-y-4">
+            <div className="lg:col-span-2 space-y-3">
               {items.map((item) => (
                 <motion.div
                   key={item.id}
                   layout
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  className="bg-card rounded-xl p-6 shadow-card flex gap-6"
+                  exit={{ opacity: 0, x: -50 }}
+                  className="bg-white rounded-xl p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)] flex gap-4"
                 >
                   {/* Image */}
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-24 h-24 object-cover rounded-lg"
+                    className="w-20 h-20 lg:w-24 lg:h-24 object-cover rounded-lg flex-shrink-0"
                   />
 
                   {/* Details */}
-                  <div className="flex-1">
-                    <h3 className="text-lg font-display font-semibold text-foreground mb-2">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base lg:text-lg font-display font-semibold text-[#1B2C4B] truncate">
                       {item.name}
                     </h3>
-                    <p className="text-xl font-bold text-primary mb-4">
+                    <p className="text-lg lg:text-xl font-bold text-[#C6A136] mt-1">
                       €{item.price.toFixed(2)}
                     </p>
 
                     {/* Quantity Controls */}
-                    <div className="flex items-center gap-3">
-                      <button
+                    <div className="flex items-center gap-2 mt-3">
+                      <motion.button
                         onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                        className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+                        whileTap={{ scale: 0.9 }}
+                        className="w-9 h-9 rounded-lg bg-[#F5F1E6] hover:bg-[#EAE4D8] flex items-center justify-center transition-colors"
                         aria-label="Decrease quantity"
                       >
-                        <Minus className="h-4 w-4" />
-                      </button>
-                      <span className="w-12 text-center font-semibold">
+                        <Minus className="h-4 w-4 text-[#1B2C4B]" />
+                      </motion.button>
+                      <span className="w-8 text-center font-semibold text-[#1B2C4B]">
                         {item.quantity}
                       </span>
-                      <button
+                      <motion.button
                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                        className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+                        whileTap={{ scale: 0.9 }}
+                        className="w-9 h-9 rounded-lg bg-[#F5F1E6] hover:bg-[#EAE4D8] flex items-center justify-center transition-colors"
                         aria-label="Increase quantity"
                       >
-                        <Plus className="h-4 w-4" />
-                      </button>
+                        <Plus className="h-4 w-4 text-[#1B2C4B]" />
+                      </motion.button>
                     </div>
                   </div>
 
                   {/* Remove Button */}
-                  <button
+                  <motion.button
                     onClick={() => removeItem(item.id)}
-                    className="text-destructive hover:text-destructive/80 transition-colors"
+                    whileTap={{ scale: 0.9 }}
+                    className="text-[#1B2C4B]/40 hover:text-red-500 transition-colors self-start p-1"
                     aria-label="Remove item"
                   >
                     <Trash2 className="h-5 w-5" />
-                  </button>
+                  </motion.button>
                 </motion.div>
               ))}
             </div>
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-card rounded-xl p-6 shadow-card sticky top-24">
-                <h2 className="text-2xl font-display font-bold text-foreground mb-6">
-                  Order Summary
+              <div className="bg-white rounded-xl p-5 lg:p-6 shadow-[0_2px_12px_rgba(0,0,0,0.06)] sticky top-24">
+                <h2 className="text-xl font-display font-bold text-[#1B2C4B] mb-5">
+                  Complete Your Order
                 </h2>
 
-                <div className="space-y-3 mb-6">
-                  <div className="flex justify-between text-muted-foreground">
-                    <span>Subtotal</span>
-                    <span>€{subtotal.toFixed(2)}</span>
-                  </div>
-                  <div className="border-t border-border pt-3 flex justify-between text-xl font-bold text-foreground">
-                    <span>Total</span>
-                    <span>€{total.toFixed(2)}</span>
-                  </div>
+                {/* Total */}
+                <div className="flex justify-between items-center py-3 border-b border-[#1B2C4B]/10 mb-5">
+                  <span className="text-[#1B2C4B]/70">Total</span>
+                  <span className="text-2xl font-bold text-[#1B2C4B]">€{total.toFixed(2)}</span>
                 </div>
 
-                {hasCakesOnly && (
-                  <div className="space-y-4 mb-6 pb-6 border-b border-border">
-                    <h3 className="font-semibold text-foreground text-sm md:text-base">Order via Instagram</h3>
+                {/* Form */}
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[#1B2C4B] mb-1.5">
+                      Your Name
+                    </label>
                     <input
                       type="text"
-                      placeholder="Your Name"
+                      placeholder="Enter your name"
                       value={customerName}
                       onChange={(e) => setCustomerName(e.target.value)}
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full px-4 py-3 rounded-xl border border-[#1B2C4B]/10 bg-[#F5F1E6]/50 text-[#1B2C4B] placeholder:text-[#1B2C4B]/40 focus:outline-none focus:ring-2 focus:ring-[#C6A136]/50 focus:border-transparent transition-all"
                     />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-[#1B2C4B] mb-1.5">
+                      Phone Number
+                    </label>
                     <input
                       type="tel"
-                      placeholder="Phone Number"
+                      placeholder="Enter your phone"
                       value={customerPhone}
                       onChange={(e) => setCustomerPhone(e.target.value)}
-                      className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                      className="w-full px-4 py-3 rounded-xl border border-[#1B2C4B]/10 bg-[#F5F1E6]/50 text-[#1B2C4B] placeholder:text-[#1B2C4B]/40 focus:outline-none focus:ring-2 focus:ring-[#C6A136]/50 focus:border-transparent transition-all"
                     />
-                    <div className="flex gap-2">
+                  </div>
+                  
+                  {/* Segmented Control */}
+                  <div>
+                    <label className="block text-sm font-medium text-[#1B2C4B] mb-1.5">
+                      Delivery Method
+                    </label>
+                    <div className="flex bg-[#F5F1E6] rounded-xl p-1">
                       <button
                         onClick={() => setDeliveryMethod('pickup')}
-                        className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                        className={`flex-1 py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-200 ${
                           deliveryMethod === 'pickup'
-                            ? 'bg-primary text-background'
-                            : 'bg-secondary text-foreground border border-border'
+                            ? 'bg-white text-[#1B2C4B] shadow-sm'
+                            : 'text-[#1B2C4B]/60 hover:text-[#1B2C4B]'
                         }`}
                       >
                         Pickup
                       </button>
                       <button
                         onClick={() => setDeliveryMethod('delivery')}
-                        className={`flex-1 py-2 px-4 rounded-lg font-medium transition-colors ${
+                        className={`flex-1 py-2.5 px-4 rounded-lg font-medium text-sm transition-all duration-200 ${
                           deliveryMethod === 'delivery'
-                            ? 'bg-primary text-background'
-                            : 'bg-secondary text-foreground border border-border'
+                            ? 'bg-white text-[#1B2C4B] shadow-sm'
+                            : 'text-[#1B2C4B]/60 hover:text-[#1B2C4B]'
                         }`}
                       >
                         Delivery
                       </button>
                     </div>
-                    <LuxuryButton
-                      size="lg"
-                      className="w-full text-sm md:text-base"
-                      onClick={handleSendInstagram}
-                      disabled={!customerName || !customerPhone}
-                    >
-                      Send Order on Instagram
-                    </LuxuryButton>
-                    <p className="text-xs text-muted-foreground text-center mt-2">
-                      Message will be copied — paste it in Instagram DMs
-                    </p>
                   </div>
-                )}
+                  
+                  {/* Main CTA */}
+                  <motion.button
+                    onClick={handleSendInstagram}
+                    disabled={!customerName || !customerPhone}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full h-12 bg-[#C6A136] hover:bg-[#D4AF37] disabled:bg-[#C6A136]/50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors duration-200 mt-2"
+                  >
+                    Order on Instagram →
+                  </motion.button>
+                  
+                  <p className="text-xs text-[#1B2C4B]/50 text-center">
+                    Your order will be copied — paste it in Instagram DMs
+                  </p>
+                </div>
 
-                <Link to="/menu" className="block mt-4">
-                  <LuxuryButton variant="ghost" size="md" className="w-full">
-                    Continue Shopping
-                  </LuxuryButton>
+                <Link to="/menu" className="block mt-5 pt-5 border-t border-[#1B2C4B]/10">
+                  <button className="w-full py-2.5 text-[#1B2C4B]/70 hover:text-[#1B2C4B] font-medium text-sm transition-colors">
+                    ← Continue Shopping
+                  </button>
                 </Link>
               </div>
             </div>

@@ -48,90 +48,99 @@ const Reviews = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24 pb-20">
+    <div className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10 lg:mb-14"
         >
-          <h1 className="text-5xl md:text-6xl font-display font-bold text-foreground mb-6">
+          <h1 className="text-3xl lg:text-5xl font-display font-bold text-[#1B2C4B] mb-3">
             Customer Reviews
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what our customers have to say
+          <p className="text-base lg:text-lg text-[#1B2C4B]/60 max-w-xl mx-auto">
+            Don't just take our word for it — hear from our happy customers
           </p>
           
-          {/* Average Rating */}
-          <div className="mt-8 inline-flex flex-col items-center bg-card rounded-xl p-8 shadow-card">
-            <div className="text-6xl font-display font-bold text-primary mb-2">5.0</div>
-            <div className="flex gap-1 mb-2">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="h-6 w-6 fill-primary text-primary" />
-              ))}
+          {/* Rating Summary */}
+          <div className="mt-8 inline-flex items-center gap-4 bg-white rounded-2xl px-6 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+            <div className="text-4xl lg:text-5xl font-display font-bold text-[#1B2C4B]">5.0</div>
+            <div className="text-left">
+              <div className="flex gap-0.5 mb-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="h-5 w-5 fill-[#C6A136] text-[#C6A136]" />
+                ))}
+              </div>
+              <p className="text-sm text-[#1B2C4B]/60">{reviews.length} reviews</p>
             </div>
-            <p className="text-muted-foreground">Based on {reviews.length} reviews</p>
           </div>
         </motion.div>
 
         {/* Reviews Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-4 lg:gap-6 mb-10">
           {reviews.map((review, index) => (
             <motion.div
               key={`${review.name}-${index}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-card rounded-xl p-8 shadow-card relative"
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="bg-white rounded-xl p-5 lg:p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)] relative"
             >
               {/* Quote Icon */}
-              <Quote className="absolute top-6 right-6 h-8 w-8 text-primary/20" />
+              <Quote className="absolute top-5 right-5 h-6 w-6 text-[#C6A136]/15" />
 
               {/* Avatar & Info */}
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-3 mb-3">
                 <img
                   src={review.avatar}
                   alt={review.name}
-                  className="w-12 h-12 rounded-full"
+                  className="w-10 h-10 rounded-full bg-[#F5F1E6]"
                 />
                 <div>
-                  <h3 className="font-semibold text-foreground">{review.name}</h3>
-                  <p className="text-sm text-muted-foreground">{review.date}</p>
+                  <h3 className="font-semibold text-[#1B2C4B] text-sm lg:text-base">{review.name}</h3>
+                  <p className="text-xs text-[#1B2C4B]/50">{review.date}</p>
                 </div>
               </div>
 
               {/* Rating */}
-              <div className="flex gap-1 mb-4">
+              <div className="flex gap-0.5 mb-3">
                 {[...Array(review.rating)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                  <Star key={i} className="h-4 w-4 fill-[#C6A136] text-[#C6A136]" />
                 ))}
               </div>
 
               {/* Comment */}
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-sm lg:text-[15px] text-[#1B2C4B]/70 leading-relaxed">
                 "{review.comment}"
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Leave a Review CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-16 bg-gradient-to-br from-primary/10 to-secondary/20 rounded-2xl p-12 text-center"
+          transition={{ duration: 0.5 }}
+          className="text-center"
         >
-          <h2 className="text-3xl font-display font-bold text-foreground mb-4">
-            Experience the Excellence Yourself
-          </h2>
-          <p className="text-lg text-muted-foreground mb-6">
-            Visit us today and discover why our customers keep coming back
+          <p className="text-[#1B2C4B]/60 mb-4 text-sm">
+            Enjoyed your visit? We'd love to hear from you!
           </p>
+          <motion.a
+            href="https://g.page/r/ingridbakes/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#1B2C4B] hover:bg-[#243A5E] text-white font-semibold text-sm rounded-xl transition-colors duration-200"
+          >
+            <Star className="h-4 w-4" />
+            Leave a Review on Google
+          </motion.a>
         </motion.div>
       </div>
     </div>
