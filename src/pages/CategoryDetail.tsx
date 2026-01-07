@@ -1,7 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { ProductCard } from '@/components/ProductCard';
+import { MenuProductCard } from '@/components/MenuProductCard';
+import { MenuBackground } from '@/components/MenuBackground';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
@@ -35,12 +36,13 @@ const CategoryDetail = () => {
 
   if (!products.length) {
     return (
-      <div className="min-h-screen pt-24 pb-20 bg-card">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-display font-bold text-foreground mb-4">
+      <div className="min-h-screen pt-20 pb-16 relative">
+        <MenuBackground />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h1 className="text-3xl font-display font-bold text-[#1B2C4B] mb-4">
             Category not found
           </h1>
-          <Link to="/menu" className="text-primary hover:underline">
+          <Link to="/menu" className="text-[#C6A136] hover:underline">
             Back to Menu
           </Link>
         </div>
@@ -49,58 +51,81 @@ const CategoryDetail = () => {
   }
 
   return (
-    <div 
-      className="min-h-screen pt-16 lg:pt-24 pb-16 lg:pb-20 bg-[#F5F1E6]"
-    >
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen pt-16 pb-16 relative">
+      {/* Warm bakery background - same as Menu */}
+      <MenuBackground />
+      
+      <div className="container mx-auto px-4 relative z-10">
         {/* Back Button */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
+          initial={{ opacity: 0, x: -15 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-4 lg:mb-8"
+          transition={{ duration: 0.3 }}
+          className="mb-4"
         >
           <Link 
             to="/menu"
-            className="inline-flex items-center gap-2 text-[#1B2C4B] hover:text-[#C6A136] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[#1B2C4B] hover:text-[#C6A136] transition-colors text-sm"
           >
-            <ArrowLeft className="h-5 w-5" />
+            <ArrowLeft className="h-4 w-4" />
             <span className="font-medium">Back to Menu</span>
           </Link>
         </motion.div>
 
-        {/* Header */}
+        {/* Header - compact */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-8 lg:mb-12"
+          transition={{ duration: 0.3 }}
+          className="text-center mb-6"
         >
-          <h1 className="text-3xl lg:text-5xl font-display font-semibold text-[#1B2C4B] mb-2">
+          <h1 className="text-[28px] md:text-3xl lg:text-4xl font-display font-semibold text-[#1B2C4B] mb-1">
             {categoryName}
           </h1>
-          <p className="text-base lg:text-lg text-[#1B2C4B]/75">
-            Explore our {products.length} handcrafted {categoryName?.toLowerCase()}
+          <p className="text-sm text-[#1B2C4B]/65">
+            {products.length} handcrafted items
           </p>
         </motion.div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Products Grid - 2 columns on mobile (MANDATORY) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
           {products.map((product, idx) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05, duration: 0.6 }}
+              transition={{ delay: idx * 0.04, duration: 0.4 }}
             >
-              <ProductCard
-                {...product}
-                category={product.category}
+              <MenuProductCard
+                id={product.id}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+                unit={product.unit}
+                image={product.image}
                 onAddToCart={() => handleAddToCart(product)}
               />
             </motion.div>
           ))}
         </div>
+        
+        {/* Order CTA at bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-8 text-center"
+        >
+          <a
+            href="https://www.instagram.com/ingridbakes.cy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1B2C4B] hover:bg-[#243A5E] text-white rounded-[10px] font-semibold text-sm border border-transparent hover:border-[#C6A136]/40 transition-all duration-200"
+          >
+            Order on Instagram →
+          </a>
+        </motion.div>
       </div>
     </div>
   );
