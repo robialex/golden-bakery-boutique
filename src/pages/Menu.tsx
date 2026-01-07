@@ -116,20 +116,16 @@ const Menu = () => {
     return content;
   }, [filteredCategories]);
   return <div className="min-h-screen pt-24 pb-20 relative">
-      {/* Background image with blur */}
+      {/* Background image - contain on mobile, cover on desktop, subtle blur */}
       <div 
-        className="absolute inset-0"
+        className="absolute inset-0 bg-no-repeat bg-center bg-contain md:bg-cover"
         style={{
           backgroundImage: `url(${menuBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center top',
-          backgroundRepeat: 'no-repeat',
-          filter: 'blur(4px)',
-          transform: 'scale(1.02)'
+          filter: 'blur(2px)',
         }}
       />
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/55" />
+      {/* Light overlay for readability */}
+      <div className="absolute inset-0 bg-black/30" />
       
       <div className="container relative z-10 my-[20px] mx-0 px-[17px] py-0">
         {/* Header */}
