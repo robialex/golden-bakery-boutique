@@ -4,44 +4,64 @@ import cover3 from '@/assets/menu-bg/cover-3.jpg';
 import cover4 from '@/assets/menu-bg/cover-4.jpg';
 
 export const MenuBackground = () => {
-  const bgImages = [cover1, cover2, cover3, cover4];
-
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Bakery photo layers - alternating positions */}
-      {bgImages.map((src, idx) => (
-        <div
-          key={idx}
-          className="absolute"
-          style={{
-            // Position each image in different quadrants
-            top: idx < 2 ? (idx === 0 ? '0%' : '25%') : (idx === 2 ? '50%' : '70%'),
-            left: idx % 2 === 0 ? '0%' : '50%',
-            width: '60%',
-            height: '50%',
-            backgroundImage: `url(${src})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            filter: 'blur(16px) grayscale(30%)',
-            opacity: 0.06,
-            transform: idx % 2 === 1 ? 'scaleX(-1)' : 'none',
-          }}
-        />
-      ))}
+      {/* Base cream color */}
+      <div className="absolute inset-0 bg-[#F5F1E6]" />
+      
+      {/* Photo 1 - Top left quadrant */}
+      <div
+        className="absolute top-0 left-0 w-[55%] h-[45%]"
+        style={{
+          backgroundImage: `url(${cover1})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(14px) grayscale(20%)',
+          opacity: 0.12,
+        }}
+      />
+      
+      {/* Photo 2 - Top right quadrant */}
+      <div
+        className="absolute top-[5%] right-0 w-[50%] h-[40%]"
+        style={{
+          backgroundImage: `url(${cover2})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(16px) grayscale(15%)',
+          opacity: 0.1,
+        }}
+      />
+      
+      {/* Photo 3 - Bottom left quadrant */}
+      <div
+        className="absolute top-[45%] left-0 w-[55%] h-[50%]"
+        style={{
+          backgroundImage: `url(${cover3})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(18px) grayscale(25%)',
+          opacity: 0.1,
+        }}
+      />
+      
+      {/* Photo 4 - Bottom right quadrant */}
+      <div
+        className="absolute top-[50%] right-0 w-[50%] h-[50%]"
+        style={{
+          backgroundImage: `url(${cover4})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(14px) grayscale(20%)',
+          opacity: 0.11,
+        }}
+      />
       
       {/* Warm cream overlay for readability */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'rgba(245, 241, 230, 0.92)',
-        }}
-      />
-      
-      {/* Subtle warm gradient overlay */}
-      <div 
-        className="absolute inset-0"
-        style={{
-          background: 'linear-gradient(180deg, rgba(245, 241, 230, 0.98) 0%, rgba(245, 241, 230, 0.85) 50%, rgba(245, 241, 230, 0.95) 100%)',
+          background: 'rgba(245, 241, 230, 0.75)',
         }}
       />
     </div>
