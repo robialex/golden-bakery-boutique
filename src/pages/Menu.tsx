@@ -115,22 +115,21 @@ const Menu = () => {
     });
     return content;
   }, [filteredCategories]);
-  return <div className="min-h-screen pt-24 pb-20 relative" style={{
-    backgroundImage: `url(${menuBackground})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed'
-  }}>
+  return <div className="min-h-screen pt-24 pb-20 relative">
+      {/* Background image with blur */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url(${menuBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center top',
+          backgroundRepeat: 'no-repeat',
+          filter: 'blur(4px)',
+          transform: 'scale(1.02)'
+        }}
+      />
       {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/40" />
-      {/* Subtle paper texture overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]" style={{
-      backgroundImage: `
-            repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px),
-            repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(27, 44, 75, 0.4) 2px, rgba(27, 44, 75, 0.4) 3px)
-          `,
-      backgroundSize: '40px 40px'
-    }} />
+      <div className="absolute inset-0 bg-black/55" />
       
       <div className="container relative z-10 my-[20px] mx-0 px-[17px] py-0">
         {/* Header */}
@@ -144,7 +143,7 @@ const Menu = () => {
         duration: 0.6,
         ease: "easeOut"
       }} className="text-center mb-12">
-          <motion.h1 className="text-5xl md:text-6xl font-display font-semibold text-[#1B2C4B] mb-4" initial={{
+          <motion.h1 className="text-5xl md:text-6xl font-display font-semibold text-white mb-4 drop-shadow-lg" initial={{
           opacity: 0
         }} animate={{
           opacity: 1
@@ -154,7 +153,7 @@ const Menu = () => {
         }}>
             Our Menu
           </motion.h1>
-          <motion.p className="text-lg md:text-xl text-[#1B2C4B]/85 max-w-3xl mx-auto mb-8 leading-relaxed" initial={{
+          <motion.p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-8 leading-relaxed drop-shadow-md" initial={{
           opacity: 0
         }} animate={{
           opacity: 1
@@ -177,8 +176,8 @@ const Menu = () => {
           delay: 0.3
         }} className="max-w-md mx-auto mb-6">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#1B2C4B]/60" />
-              <input type="text" placeholder="Search categories or items..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-white border-2 border-[#1B2C4B]/10 rounded-xl text-[#1B2C4B] placeholder:text-[#1B2C4B]/50 focus:outline-none focus:border-[#C6A136] focus:ring-2 focus:ring-[#C6A136]/20 transition-all" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60" />
+              <input type="text" placeholder="Search categories or items..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-white/95 backdrop-blur-sm border-2 border-white/20 rounded-xl text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-lg" />
             </div>
           </motion.div>
           
