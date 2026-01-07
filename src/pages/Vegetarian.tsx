@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Leaf } from 'lucide-react';
-import { MenuProductCard } from '@/components/MenuProductCard';
-import { MenuBackground } from '@/components/MenuBackground';
+import { ProductCard } from '@/components/ProductCard';
 import { useCartStore } from '@/stores/cartStore';
 import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
@@ -26,84 +25,70 @@ const Vegetarian = () => {
   };
 
   return (
-    <div className="min-h-screen pt-16 pb-16 relative">
-      {/* Warm bakery background - same as Menu */}
-      <MenuBackground />
+    <div 
+      className="min-h-screen pt-24 pb-20"
+      style={{
+        background: 'linear-gradient(180deg, #1B2C4B 0%, #F5F1E6 20%)',
+      }}
+    >
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30" 
+        style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(198, 161, 54, 0.03) 35px, rgba(198, 161, 54, 0.03) 70px)`
+        }}
+      />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Back Button */}
         <motion.div
-          initial={{ opacity: 0, x: -15 }}
+          initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3 }}
-          className="mb-4"
+          transition={{ duration: 0.6 }}
+          className="mb-8"
         >
           <Link 
             to="/menu"
-            className="inline-flex items-center gap-1.5 text-[#1B2C4B] hover:text-[#C6A136] transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-white hover:text-primary transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-5 w-5" />
             <span className="font-medium">Back to Menu</span>
           </Link>
         </motion.div>
 
-        {/* Header - compact */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-center mb-6"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
         >
-          <div className="inline-flex items-center justify-center gap-2 mb-1">
-            <Leaf className="h-6 w-6 text-[#C6A136]" />
-            <h1 className="text-[28px] md:text-3xl lg:text-4xl font-display font-semibold text-[#1B2C4B]">
+          <div className="inline-flex items-center justify-center gap-3 mb-4">
+            <Leaf className="h-10 w-10 text-primary" />
+            <h1 className="text-4xl md:text-5xl font-display font-bold text-white">
               Vegetarian Options
             </h1>
           </div>
-          <p className="text-sm text-[#1B2C4B]/65">
-            {vegetarianProducts.length} delicious vegetarian desserts
+          <p className="text-lg text-white/90 max-w-2xl mx-auto">
+            Discover our {vegetarianProducts.length} delicious vegetarian desserts, crafted with care and premium ingredients
           </p>
         </motion.div>
 
-        {/* Products Grid - 2 columns on mobile (MANDATORY) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5">
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {vegetarianProducts.map((product, idx) => (
             <motion.div
               key={product.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.04, duration: 0.4 }}
+              transition={{ delay: idx * 0.05, duration: 0.6 }}
             >
-              <MenuProductCard
-                id={product.id}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                unit={product.unit}
-                image={product.image}
+              <ProductCard
+                {...product}
                 onAddToCart={() => handleAddToCart(product)}
               />
             </motion.div>
           ))}
         </div>
-        
-        {/* Order CTA at bottom */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="mt-8 text-center"
-        >
-          <a
-            href="https://www.instagram.com/ingridbakes.cy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1B2C4B] hover:bg-[#243A5E] text-white rounded-[10px] font-semibold text-sm border border-transparent hover:border-[#C6A136]/40 transition-all duration-200"
-          >
-            Order on Instagram →
-          </a>
-        </motion.div>
       </div>
     </div>
   );
