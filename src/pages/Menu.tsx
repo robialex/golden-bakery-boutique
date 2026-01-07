@@ -7,6 +7,9 @@ import { FullWidthShowcase } from '@/components/FullWidthShowcase';
 import { SpecialtyFocusBlock } from '@/components/SpecialtyFocusBlock';
 import menuData from '@/data/menu.json';
 
+// Background image
+import menuBackground from '@/assets/menu-background.jpg';
+
 // Gallery images for showcases
 import showcasingBakes from '@/assets/gallery/showcasing-bakes.jpg';
 import blueberry from '@/assets/gallery/blueberry.jpg';
@@ -97,7 +100,7 @@ const Menu = () => {
       // After every 2 cards, add a Full-Width Showcase (only on mobile/tablet view conceptually)
       if (cardPairCount === 2 && showcaseIndex < showcaseImages.length) {
         content.push(
-          <div key={`showcase-${showcaseIndex}`} className="col-span-2 md:col-span-3 lg:col-span-4">
+          <div key={`showcase-${showcaseIndex}`} className="col-span-2 lg:col-span-4">
             <FullWidthShowcase
               imageSrc={showcaseImages[showcaseIndex].src}
               alt={showcaseImages[showcaseIndex].alt}
@@ -111,7 +114,7 @@ const Menu = () => {
       // After every 4 cards (2 showcase cycles), add a Specialty Focus Block
       if (index > 0 && (index + 1) % 4 === 0 && ctaIndex < ctaBlocks.length) {
         content.push(
-          <div key={`cta-${ctaIndex}`} className="col-span-2 md:col-span-3 lg:col-span-4">
+          <div key={`cta-${ctaIndex}`} className="col-span-2 lg:col-span-4">
             <SpecialtyFocusBlock
               imageSrc={ctaBlocks[ctaIndex].imageSrc}
               headline={ctaBlocks[ctaIndex].headline}
@@ -130,8 +133,16 @@ const Menu = () => {
 
   return (
     <div 
-      className="min-h-screen pt-24 pb-20 bg-[#F5F1E6]"
+      className="min-h-screen pt-24 pb-20 relative"
+      style={{
+        backgroundImage: `url(${menuBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
     >
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-black/40" />
       {/* Subtle paper texture overlay */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.03]" 
@@ -204,7 +215,7 @@ const Menu = () => {
         </motion.div>
 
         {/* Dynamic Category Grid with Showcases and CTAs */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {dynamicContent}
         </div>
 
