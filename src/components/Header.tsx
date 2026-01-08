@@ -64,10 +64,10 @@ export const Header = () => {
   const isHomepage = location.pathname === '/';
 
   return <>
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-[220ms] ease-out ${
+      <header className={`fixed top-0 left-0 right-0 z-50 ${
         isHomepage 
-          ? 'bg-[rgba(27,44,75,0.85)] backdrop-blur-md border-b border-primary/20 shadow-[0_8px_20px_rgba(0,0,0,0.12)]' 
-          : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm'
+          ? 'bg-[rgba(20,30,45,0.55)] backdrop-blur-[14px]' 
+          : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-[220ms] ease-out'
       }`}>
         <nav className={`container mx-auto px-4 md:px-6 py-4 md:py-5 ${isHomepage ? 'bg-transparent' : 'bg-background'}`}>
         <div className="flex items-center justify-between">
@@ -115,7 +115,7 @@ export const Header = () => {
             height: 0
           }} transition={{
             duration: 0.3
-          }} className="lg:hidden overflow-hidden bg-white/70 backdrop-blur-xl">
+          }} className={`lg:hidden overflow-hidden ${isHomepage ? 'bg-[rgba(20,30,45,0.55)] backdrop-blur-[14px]' : 'bg-secondary/98'}`}>
               <div className="py-4 space-y-3">
                 {navLinks.map((link, idx) => <motion.div key={link.path} initial={{
                 opacity: 0,
