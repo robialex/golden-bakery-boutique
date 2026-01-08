@@ -66,7 +66,7 @@ export const Header = () => {
   return <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-[220ms] ease-out ${
         isHomepage 
-          ? 'bg-white/60 backdrop-blur-xl border-b border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)]' 
+          ? 'bg-[rgba(27,44,75,0.85)] backdrop-blur-md border-b border-primary/20 shadow-[0_8px_20px_rgba(0,0,0,0.12)]' 
           : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm'
       }`}>
         <nav className={`container mx-auto px-4 md:px-6 py-4 md:py-5 ${isHomepage ? 'bg-transparent' : 'bg-background'}`}>
