@@ -61,11 +61,15 @@ export const Header = () => {
     });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
+  const isHomepage = location.pathname === '/';
+
   return <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] transition-all duration-[220ms] ease-out" style={{
-      backdropFilter: 'blur(6px)'
-    }}>
-        <nav className="container mx-auto px-4 md:px-6 py-4 md:py-5 bg-background">
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-[220ms] ease-out ${
+        isHomepage 
+          ? 'bg-white/60 backdrop-blur-xl border-b border-white/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)]' 
+          : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm'
+      }`}>
+        <nav className={`container mx-auto px-4 md:px-6 py-4 md:py-5 ${isHomepage ? 'bg-transparent' : 'bg-background'}`}>
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
@@ -111,7 +115,7 @@ export const Header = () => {
             height: 0
           }} transition={{
             duration: 0.3
-          }} className="lg:hidden overflow-hidden bg-secondary/98">
+          }} className="lg:hidden overflow-hidden bg-white/70 backdrop-blur-xl">
               <div className="py-4 space-y-3">
                 {navLinks.map((link, idx) => <motion.div key={link.path} initial={{
                 opacity: 0,
