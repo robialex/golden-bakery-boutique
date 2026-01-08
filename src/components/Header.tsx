@@ -67,14 +67,14 @@ export const Header = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 ${
           isHomepage
-            ? 'bg-[rgba(255,255,255,0.08)]'
+            ? 'bg-[rgba(255,255,255,0.05)] border-b border-white/10'
             : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-[220ms] ease-out'
         }`}
         style={
           isHomepage
             ? ({
-                backdropFilter: 'blur(14px)',
-                WebkitBackdropFilter: 'blur(14px)',
+                backdropFilter: 'blur(10px)',
+                WebkitBackdropFilter: 'blur(10px)',
               } as React.CSSProperties)
             : undefined
         }
