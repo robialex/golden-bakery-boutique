@@ -16,8 +16,8 @@ const Hero = () => {
       <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden py-16 md:py-20">
         {/* Animated Background Image with Slow Zoom and Parallax */}
         <motion.div 
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1.2 }}
+          initial={{ scale: 1.02 }}
+          animate={{ scale: 1.08 }}
           transition={{ 
             duration: 50, 
             repeat: Infinity, 
@@ -31,8 +31,8 @@ const Hero = () => {
             className="w-full h-full bg-cover"
             style={{ 
               backgroundImage: `url(${heroImage})`,
-              backgroundPosition: 'center 0%',
-              objectFit: 'cover'
+              backgroundPosition: 'center 25%',
+              backgroundSize: '105%'
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/85" />
