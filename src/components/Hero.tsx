@@ -28,11 +28,12 @@ const Hero = () => {
           className="absolute inset-0"
         >
           <div 
-            className="w-full h-full bg-cover"
+            className="w-full h-full"
             style={{ 
               backgroundImage: `url(${heroImage})`,
-              backgroundPosition: 'center 5%',
-              backgroundSize: '105%'
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat'
             }}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/85" />
