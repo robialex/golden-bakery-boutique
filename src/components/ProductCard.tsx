@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 interface ProductCardProps {
   id: string;
   name: string;
@@ -7,37 +8,38 @@ interface ProductCardProps {
   unit?: string;
   image: string;
   category?: string;
-  onAddToCart: () => void;
 }
+
 export const ProductCard = ({
   name,
   description,
   price,
   unit,
   image,
-  category,
-  onAddToCart
 }: ProductCardProps) => {
-  // Only show Add to Cart for cake categories
-  const cakeCategories = ['Honey Cakes', 'Mousse Cakes', 'Sponge Cakes', 'Cheesecakes', 'Other Cakes'];
-  const isCake = category ? cakeCategories.includes(category) : true;
-  return <motion.div initial={{
-    opacity: 0,
-    y: 16
-  }} whileInView={{
-    opacity: 1,
-    y: 0
-  }} viewport={{
-    once: true
-  }} transition={{
-    duration: 0.3,
-    ease: "easeOut"
-  }} whileTap={{
-    scale: 0.98
-  }} className="bg-white rounded-2xl shadow-[0_2px_12px_rgba(27,44,75,0.06)] hover:shadow-[0_4px_20px_rgba(27,44,75,0.1)] transition-all duration-300 overflow-hidden group">
+  // Generate Instagram DM link with prefilled message
+  const generateInstagramLink = () => {
+    const message = `Hi! I'm interested in ordering this item: ${name}. Could you please give me more details?`;
+    return `https://ig.me/m/ingridbakes.cy?text=${encodeURIComponent(message)}`;
+  };
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 16 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true }} 
+      transition={{ duration: 0.3, ease: "easeOut" }} 
+      whileTap={{ scale: 0.98 }} 
+      className="bg-white rounded-xl shadow-[0_2px_12px_rgba(27,44,75,0.06)] hover:shadow-[0_4px_20px_rgba(27,44,75,0.1)] transition-all duration-300 overflow-hidden group"
+    >
       {/* Image */}
-      <div className="relative h-48 lg:h-56 overflow-hidden">
-        <img src={image} alt={name} className="w-full h-full object-cover brightness-[1.02] contrast-[1.02] transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
+      <div className="relative h-48 lg:h-56 overflow-hidden rounded-t-xl">
+        <img 
+          src={image} 
+          alt={name} 
+          className="w-full h-full object-cover brightness-[1.02] contrast-[1.02] transition-transform duration-500 group-hover:scale-[1.03]" 
+          loading="lazy" 
+        />
       </div>
 
       {/* Content */}
@@ -52,34 +54,33 @@ export const ProductCard = ({
           </p>
         </div>
 
-        {/* Price - more prominent */}
+        {/* Price */}
         <div className="pt-1">
           <div className="flex items-baseline gap-2">
             <span className="text-2xl lg:text-[28px] font-display font-bold text-[#C6A136]">
-              {price > 0 ? `€${price.toFixed(2)}` : 'Call for Price'}
+              {price > 0 ? `€${price.toFixed(2)}` : 'Contact for Price'}
             </span>
-            {unit && <span className="text-xs text-[#1B2C4B]/50 font-medium">
+            {unit && (
+              <span className="text-xs text-[#1B2C4B]/50 font-medium">
                 {unit}
-              </span>}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* CTAs */}
-        <div className="space-y-2.5 pt-1">
-          {/* Primary CTA - Add to Cart (for cakes only) */}
-          {price > 0 && isCake && <motion.button onClick={onAddToCart} whileTap={{
-          scale: 0.97
-        }} className="w-full h-11 bg-[#1B2C4B] hover:bg-[#243A5E] text-white rounded-xl font-semibold text-sm transition-colors duration-200" aria-label={`Add ${name} to cart`}>
-              Add to Cart
-            </motion.button>}
-          
-          {/* Secondary CTA - Order on Instagram (ghost style) */}
-          <motion.a href="https://www.instagram.com/ingridbakes.cy" target="_blank" rel="noopener noreferrer" whileTap={{
-          scale: 0.97
-        }} className="flex items-center justify-center w-full h-10 border border-[#C6A136]/40 hover:border-[#C6A136] rounded-xl font-medium text-sm transition-all duration-200 text-background bg-primary">
-            Order on Instagram →
+        {/* Order Now CTA */}
+        <div className="pt-1">
+          <motion.a 
+            href={generateInstagramLink()} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            whileTap={{ scale: 0.97 }} 
+            className="flex items-center justify-center w-full h-14 bg-[#A57F3A] hover:bg-[#8B6B30] text-white rounded-xl font-semibold text-base transition-colors duration-200 shadow-[0_2px_8px_rgba(165,127,58,0.25)]"
+          >
+            Order Now
           </motion.a>
         </div>
       </div>
-    </motion.div>;
+    </motion.div>
+  );
 };

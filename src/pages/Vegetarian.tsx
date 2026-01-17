@@ -2,27 +2,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Leaf } from 'lucide-react';
 import { ProductCard } from '@/components/ProductCard';
-import { useCartStore } from '@/stores/cartStore';
-import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
 
 const Vegetarian = () => {
-  const addItem = useCartStore((state) => state.addItem);
-
   // Filter vegetarian products
   const vegetarianProducts = menuData.products.filter(p => p.vegetarian === true);
-
-  const handleAddToCart = (product: any) => {
-    if (product.price > 0) {
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-      });
-      toast.success(`${product.name} added to cart!`);
-    }
-  };
 
   return (
     <div 
@@ -38,7 +22,7 @@ const Vegetarian = () => {
         }}
       />
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-5 max-w-[1200px] relative z-10">
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -82,10 +66,7 @@ const Vegetarian = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05, duration: 0.6 }}
             >
-              <ProductCard
-                {...product}
-                onAddToCart={() => handleAddToCart(product)}
-              />
+              <ProductCard {...product} />
             </motion.div>
           ))}
         </div>
