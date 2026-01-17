@@ -1,24 +1,10 @@
 import { motion } from 'framer-motion';
 import { ProductCard } from './ProductCard';
-import { useCartStore } from '@/stores/cartStore';
-import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
 
 export const FeaturedDesserts = () => {
-  const addItem = useCartStore((state) => state.addItem);
-
   // Get first 3 products as featured
   const featuredProducts = menuData.products.slice(0, 3);
-
-  const handleAddToCart = (product: typeof featuredProducts[0]) => {
-    addItem({
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.image,
-    });
-    toast.success(`${product.name} added to cart!`);
-  };
 
   return (
     <section className="py-20 bg-background-secondary">
@@ -46,7 +32,6 @@ export const FeaturedDesserts = () => {
             <ProductCard
               key={product.id}
               {...product}
-              onAddToCart={() => handleAddToCart(product)}
             />
           ))}
         </div>

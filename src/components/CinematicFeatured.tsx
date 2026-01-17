@@ -1,13 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { LuxuryButton } from './LuxuryButton';
-import { useCartStore } from '@/stores/cartStore';
-import { toast } from 'sonner';
 import menuData from '@/data/menu.json';
 
 export const CinematicFeatured = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const addItem = useCartStore((state) => state.addItem);
   
   // Get featured products (first 6)
   const featuredProducts = menuData.products.slice(0, 6);
@@ -20,16 +17,10 @@ export const CinematicFeatured = () => {
     return () => clearInterval(interval);
   }, [featuredProducts.length]);
 
-  const handleAddToCart = (product: typeof featuredProducts[0]) => {
-    if (product.price > 0) {
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-      });
-      toast.success(`${product.name} added to cart!`);
-    }
+  // Generate Instagram DM link with prefilled message
+  const generateInstagramLink = (productName: string) => {
+    const message = `Hi! I'm interested in ordering this item: ${productName}. Could you please give me more details?`;
+    return `https://ig.me/m/ingridbakes.cy?text=${encodeURIComponent(message)}`;
   };
 
   const leftProduct = featuredProducts[currentIndex];
@@ -88,15 +79,11 @@ export const CinematicFeatured = () => {
                     <span className="text-3xl font-display font-bold text-primary">
                       €{leftProduct.price.toFixed(2)}
                     </span>
-                    {leftProduct.price > 0 && (
-                      <LuxuryButton
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => handleAddToCart(leftProduct)}
-                      >
-                        Add to Cart
+                    <a href={generateInstagramLink(leftProduct.name)} target="_blank" rel="noopener noreferrer">
+                      <LuxuryButton size="sm" variant="secondary">
+                        Order Now
                       </LuxuryButton>
-                    )}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -130,15 +117,11 @@ export const CinematicFeatured = () => {
                     <span className="text-3xl font-display font-bold text-primary">
                       €{rightProduct.price.toFixed(2)}
                     </span>
-                    {rightProduct.price > 0 && (
-                      <LuxuryButton
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => handleAddToCart(rightProduct)}
-                      >
-                        Add to Cart
+                    <a href={generateInstagramLink(rightProduct.name)} target="_blank" rel="noopener noreferrer">
+                      <LuxuryButton size="sm" variant="secondary">
+                        Order Now
                       </LuxuryButton>
-                    )}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -177,15 +160,11 @@ export const CinematicFeatured = () => {
                     <span className="text-2xl font-display font-bold text-primary">
                       €{leftProduct.price.toFixed(2)}
                     </span>
-                    {leftProduct.price > 0 && (
-                      <LuxuryButton
-                        size="sm"
-                        variant="secondary"
-                        onClick={() => handleAddToCart(leftProduct)}
-                      >
-                        Add
+                    <a href={generateInstagramLink(leftProduct.name)} target="_blank" rel="noopener noreferrer">
+                      <LuxuryButton size="sm" variant="secondary">
+                        Order
                       </LuxuryButton>
-                    )}
+                    </a>
                   </div>
                 </div>
               </div>

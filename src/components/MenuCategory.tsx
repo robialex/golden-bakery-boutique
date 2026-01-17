@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { ProductCard } from './ProductCard';
-import { useCartStore } from '@/stores/cartStore';
-import { toast } from 'sonner';
 
 interface Product {
   id: string;
@@ -25,7 +23,6 @@ interface MenuCategoryProps {
 export const MenuCategory = ({ category, products, index }: MenuCategoryProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const addItem = useCartStore((state) => state.addItem);
 
   // Show first 3 products as preview
   const previewProducts = products.slice(0, 3);
@@ -40,18 +37,6 @@ export const MenuCategory = ({ category, products, index }: MenuCategoryProps) =
       return () => clearInterval(interval);
     }
   }, [isExpanded, previewProducts.length, products.length]);
-
-  const handleAddToCart = (product: Product) => {
-    if (product.price > 0) {
-      addItem({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.image,
-      });
-      toast.success(`${product.name} added to cart!`);
-    }
-  };
 
   return (
     <motion.section
@@ -89,10 +74,7 @@ export const MenuCategory = ({ category, products, index }: MenuCategoryProps) =
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
                   >
-                    <ProductCard
-                      {...product}
-                      onAddToCart={() => handleAddToCart(product)}
-                    />
+                    <ProductCard {...product} />
                   </motion.div>
                 ))}
               </div>
@@ -101,7 +83,7 @@ export const MenuCategory = ({ category, products, index }: MenuCategoryProps) =
                 <div className="text-center">
                   <button
                     onClick={() => setIsExpanded(true)}
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#C6A136] text-white rounded-xl font-semibold shadow-[0_4px_12px_rgba(198,161,54,0.25)] hover:shadow-[0_0_12px_rgba(198,161,54,0.5)] hover:scale-[1.03] transition-all duration-300"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#A57F3A] text-white rounded-xl font-semibold shadow-[0_4px_12px_rgba(165,127,58,0.25)] hover:shadow-[0_0_12px_rgba(165,127,58,0.5)] hover:scale-[1.03] transition-all duration-300"
                   >
                     See More
                     <ChevronDown className="h-4 w-4" />
@@ -125,10 +107,7 @@ export const MenuCategory = ({ category, products, index }: MenuCategoryProps) =
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.05 }}
                   >
-                    <ProductCard
-                      {...product}
-                      onAddToCart={() => handleAddToCart(product)}
-                    />
+                    <ProductCard {...product} />
                   </motion.div>
                 ))}
               </div>
