@@ -6,11 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import CategoryDetail from "./pages/CategoryDetail";
-import Vegetarian from "./pages/Vegetarian";
 import Contact from "./pages/Contact";
-import Reviews from "./pages/Reviews";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Gallery from "./pages/Gallery";
@@ -30,11 +26,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               
-              <Route path="/menu" element={<Menu />} />
-              <Route path="/menu/:category" element={<CategoryDetail />} />
-              <Route path="/menu/vegetarian" element={<Vegetarian />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/reviews" element={<Reviews />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />

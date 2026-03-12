@@ -12,7 +12,7 @@ const Hero = () => {
   const titleOpacity = useTransform(scrollY, [0, 300], [1, 0.3]);
   return <>
       {/* Hero Section - Title Only */}
-      <section className="relative min-h-[55vh] md:min-h-[65vh] flex items-center justify-center overflow-hidden py-16 md:py-20">
+      <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: 'min(55vh, 65vw)', paddingTop: '3rem', paddingBottom: '3rem' }}>
         {/* Animated Background Image with Slow Zoom and Parallax */}
         <motion.div initial={{
         scale: 1.02
@@ -26,11 +26,11 @@ const Hero = () => {
       }} style={{
         y: backgroundY
       }} className="absolute inset-0">
-          <div className="w-full h-full bg-cover" style={{
-          backgroundImage: `url(${heroImage})`,
-          backgroundPosition: 'center 5%',
-          backgroundSize: '105%'
-        }} />
+          <img
+            src={heroImage}
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/85" />
         </motion.div>
 
