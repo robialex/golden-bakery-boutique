@@ -6,13 +6,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
-import Menu from "./pages/Menu";
-import CategoryDetail from "./pages/CategoryDetail";
-import Vegetarian from "./pages/Vegetarian";
 import Contact from "./pages/Contact";
-import Reviews from "./pages/Reviews";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import Gallery from "./pages/Gallery";
+import NotFound from "./pages/NotFound";
 import Gallery from "./pages/Gallery";
 import NotFound from "./pages/NotFound";
 
