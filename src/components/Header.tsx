@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const PHONE_NUMBER = '+35799123456';
 
 const navLinks = [{
   name: 'Home',
@@ -25,7 +27,6 @@ export const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Show button when scrolling up, hide when scrolling down
       if (currentScrollY < lastScrollY || currentScrollY < 100) {
         setShowButton(true);
       } else {
@@ -33,7 +34,6 @@ export const Header = () => {
       }
       setLastScrollY(currentScrollY);
 
-      // Detect background color behind header icons
       if (window.innerWidth < 1024) {
         const headerHeight = 80;
         const rightSideX = window.innerWidth - 60;
@@ -54,9 +54,7 @@ export const Header = () => {
         setIsDarkBg(bgIsDark);
       }
     };
-    window.addEventListener('scroll', handleScroll, {
-      passive: true
-    });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
@@ -64,21 +62,14 @@ export const Header = () => {
 
   return <>
     <header
-      className={`fixed top-0 left-0 right-0 z-50 ${
-        isHomepage
-          ? 'bg-[rgba(255,255,255,0.03)] border-b border-primary/40'
-          : 'bg-secondary/94 border-b border-primary/30 shadow-[0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm transition-all duration-[220ms] ease-out'
-      }`}
-      style={
-        isHomepage
-          ? ({
-              backdropFilter: 'blur(6px)',
-              WebkitBackdropFilter: 'blur(6px)',
-            } as React.CSSProperties)
-          : undefined
-      }
+      className="fixed top-0 left-0 right-0 z-50 border-b border-primary/30"
+      style={{
+        background: 'rgba(15, 31, 53, 0.65)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
+      } as React.CSSProperties}
     >
-      <nav className={`container mx-auto px-4 md:px-6 py-4 md:py-5 ${isHomepage ? 'bg-transparent' : 'bg-background'}`}>
+      <nav className="container mx-auto px-4 md:px-6 py-4 md:py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
@@ -87,7 +78,7 @@ export const Header = () => {
             </h1>
           </Link>
 
-          {/* Desktop Navigation - positioned to the right */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-10 ml-auto">
             {navLinks.map(link => (
               <Link 
@@ -101,19 +92,36 @@ export const Header = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+            {/* Desktop Call Button */}
+            <a
+              href={`tel:${PHONE_NUMBER}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary border border-primary/40 rounded-lg px-4 py-2 hover:bg-primary/10 transition-colors duration-200"
+            >
+              <Phone className="h-4 w-4" />
+              Call Us
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" 
-            aria-label="Toggle menu"
-          >
-            {isOpen 
-              ? <X className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} /> 
-              : <Menu className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} />
-            }
-          </button>
+          {/* Mobile: Call Icon + Burger */}
+          <div className="flex md:hidden items-center gap-1">
+            <a
+              href={`tel:${PHONE_NUMBER}`}
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Call us"
+            >
+              <Phone className="h-5 w-5 text-primary" />
+            </a>
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" 
+              aria-label="Toggle menu"
+            >
+              {isOpen 
+                ? <X className="h-6 w-6 text-foreground transition-all duration-[180ms]" /> 
+                : <Menu className="h-6 w-6 text-foreground transition-all duration-[180ms]" />
+              }
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -124,15 +132,7 @@ export const Header = () => {
               animate={{ opacity: 1, height: 'auto' }} 
               exit={{ opacity: 0, height: 0 }} 
               transition={{ duration: 0.3 }}
-              className={`lg:hidden overflow-hidden ${isHomepage ? 'bg-[rgba(255,255,255,0.08)]' : 'bg-secondary/98'}`}
-              style={
-                isHomepage
-                  ? ({
-                      backdropFilter: 'blur(14px)',
-                      WebkitBackdropFilter: 'blur(14px)',
-                    } as React.CSSProperties)
-                  : undefined
-              }
+              className="md:hidden overflow-hidden"
             >
               <div className="py-4 space-y-3">
                 {navLinks.map((link, idx) => (
@@ -148,10 +148,8 @@ export const Header = () => {
                       onClick={() => setIsOpen(false)} 
                       className={`block text-base font-medium py-2 px-1 transition-colors duration-[180ms] ${
                         location.pathname === link.path 
-                          ? 'text-[#C6A136]' 
-                          : isDarkBg 
-                            ? 'text-[#F5F1E6] hover:text-[#C6A136]' 
-                            : 'text-[#1B2C4B] hover:text-[#C6A136]'
+                          ? 'text-primary' 
+                          : 'text-foreground hover:text-primary'
                       }`}
                     >
                       {link.name}
