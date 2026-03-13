@@ -1,108 +1,149 @@
 import { motion } from 'framer-motion';
-import { MapPin, Clock, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MapPin, Clock, Phone, ExternalLink } from 'lucide-react';
+import { useEffect } from 'react';
 
 export const VisitUs = () => {
+  // Load Elfsight script
+  useEffect(() => {
+    if (document.querySelector('script[src="https://static.elfsight.com/platform/platform.js"]')) return;
+    const script = document.createElement('script');
+    script.src = 'https://static.elfsight.com/platform/platform.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
-    <section className="py-8 lg:py-16 px-4 bg-[#F5F1E6]">
+    <section className="py-10 lg:py-20 bg-[#FCF9F0]">
       <div className="container mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="text-[1.3rem] lg:text-[1.8rem] font-display font-semibold text-center mb-6 lg:mb-10 text-[#1B2C4B] tracking-wide"
-        >
-          Visit Us
-        </motion.h2>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 lg:gap-4 max-w-5xl mx-auto mb-6 lg:mb-10">
-          {/* Location */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: 0.05 }}
-          >
-            <Link 
-              to="/contact" 
-              className="block bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-[0_2px_8px_rgba(27,44,75,0.06)] hover:shadow-[0_4px_16px_rgba(27,44,75,0.1)] transition-all duration-300 group"
-            >
-              <MapPin className="h-5 w-5 lg:h-6 lg:w-6 text-[#C6A136] mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-[0.95rem] lg:text-[1.05rem] font-semibold text-[#1B2C4B] mb-1.5 text-center">
-                Location
-              </h3>
-              <p className="text-[0.85rem] lg:text-[0.95rem] leading-[1.5] text-[rgba(27,44,75,0.75)] text-center">
-                97 Nikou Pattichi<br />
-                Strovolos, Nicosia
-              </p>
-            </Link>
-          </motion.div>
-
-          {/* Opening Hours */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: 0.1 }}
-            className="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-[0_2px_8px_rgba(27,44,75,0.06)]"
-          >
-            <Clock className="h-5 w-5 lg:h-6 lg:w-6 text-[#C6A136] mx-auto mb-2" />
-            <h3 className="text-[0.95rem] lg:text-[1.05rem] font-semibold text-[#1B2C4B] mb-1.5 text-center">
-              Opening Hours
-            </h3>
-            <p className="text-[0.85rem] lg:text-[0.95rem] leading-[1.5] text-[rgba(27,44,75,0.75)] text-center">
-              Mon - Sat: 10:00 AM - 7:00 PM<br />
-              Sunday: Closed
-            </p>
-          </motion.div>
-
-          {/* Phone */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: 0.15 }}
-          >
-            <a 
-              href="tel:+35799683775" 
-              className="block bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-[0_2px_8px_rgba(27,44,75,0.06)] hover:shadow-[0_4px_16px_rgba(27,44,75,0.1)] transition-all duration-300 group"
-            >
-              <Phone className="h-5 w-5 lg:h-6 lg:w-6 text-[#C6A136] mx-auto mb-2 group-hover:scale-110 transition-transform duration-300" />
-              <h3 className="text-[0.95rem] lg:text-[1.05rem] font-semibold text-[#1B2C4B] mb-1.5 text-center">
-                Phone
-              </h3>
-              <p className="text-[0.85rem] lg:text-[0.95rem] leading-[1.5] text-[rgba(27,44,75,0.75)] text-center">
-                +357 99 683775
-              </p>
-            </a>
-          </motion.div>
-        </div>
-
-        {/* Interactive Map */}
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.25, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-8 lg:mb-14"
         >
-          <div className="h-[260px] lg:h-[450px] rounded-xl lg:rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(27,44,75,0.08)]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d206.69606532056327!2d33.36423576971612!3d35.16404459864808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1746f17d0bf9%3A0x373b858d942767f6!2sIngrid%20Bakes!5e0!3m2!1sen!2s!4v1737562000000!5m2!1sen!2s"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Ingrid Bakes Location - 97 Nikou Pattichi, Strovolos, Nicosia"
-            />
-          </div>
+          <p className="text-xs lg:text-sm uppercase tracking-[0.25em] text-[#C6A136] font-medium mb-2">
+            Find Us
+          </p>
+          <h2 className="text-[1.5rem] lg:text-[2.2rem] font-display font-bold text-[#1B2C4B]">
+            Visit Our Boutique
+          </h2>
         </motion.div>
-        
-        {/* Gold divider line before footer */}
-        <div className="border-t border-[#C6A136]/20 mt-8 lg:mt-12" />
+
+        {/* Two-column layout */}
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 mb-12 lg:mb-20">
+          {/* Contact Info - appears first on mobile */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="order-1 lg:order-2 space-y-6 lg:space-y-8 flex flex-col justify-center"
+          >
+            {/* Location */}
+            <div className="flex items-start gap-4">
+              <MapPin className="h-5 w-5 text-[#C6A136] mt-1 flex-shrink-0" strokeWidth={1.5} />
+              <div>
+                <h3 className="text-sm font-display font-semibold text-[#C6A136] uppercase tracking-wider mb-1">
+                  Location
+                </h3>
+                <p className="text-[0.9rem] leading-relaxed text-[#2D2D2D]">
+                  97 Nikou Pattichi<br />
+                  Strovolos, Nicosia, Cyprus
+                </p>
+              </div>
+            </div>
+
+            {/* Hours */}
+            <div className="flex items-start gap-4">
+              <Clock className="h-5 w-5 text-[#C6A136] mt-1 flex-shrink-0" strokeWidth={1.5} />
+              <div>
+                <h3 className="text-sm font-display font-semibold text-[#C6A136] uppercase tracking-wider mb-1">
+                  Hours
+                </h3>
+                <div className="text-[0.9rem] leading-relaxed text-[#2D2D2D] space-y-0.5">
+                  <p>Monday – Friday: 8:30 AM – 7:00 PM</p>
+                  <p>Saturday: 9:00 AM – 7:30 PM</p>
+                  <p>Sunday: 9:00 AM – 7:00 PM</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Phone */}
+            <div className="flex items-start gap-4">
+              <Phone className="h-5 w-5 text-[#C6A136] mt-1 flex-shrink-0" strokeWidth={1.5} />
+              <div>
+                <h3 className="text-sm font-display font-semibold text-[#C6A136] uppercase tracking-wider mb-1">
+                  Phone
+                </h3>
+                <a
+                  href="tel:+35799127455"
+                  className="text-[0.9rem] text-[#2D2D2D] hover:text-[#C6A136] transition-colors"
+                >
+                  (+357) 99 127 455
+                </a>
+              </div>
+            </div>
+
+            {/* Open in Maps link */}
+            <a
+              href="https://maps.google.com/?q=Ingrid+Bakes+97+Nikou+Pattichi+Strovolos+Nicosia+Cyprus"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-[#C6A136] border-b border-[#C6A136]/40 hover:border-[#C6A136] pb-0.5 transition-colors w-fit"
+            >
+              Open in Google Maps
+              <ExternalLink className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </a>
+          </motion.div>
+
+          {/* Map - appears second on mobile */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="order-2 lg:order-1"
+          >
+            <div className="h-[280px] lg:h-[380px] rounded-2xl overflow-hidden border border-[#C6A136]/15 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d206.69606532056327!2d33.36423576971612!3d35.16404459864808!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14de1746f17d0bf9%3A0x373b858d942767f6!2sIngrid%20Bakes!5e0!3m2!1sen!2s!4v1737562000000!5m2!1sen!2s"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ingrid Bakes Location - 97 Nikou Pattichi, Strovolos, Nicosia"
+              />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Reviews Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-5xl mx-auto"
+        >
+          <div className="text-center mb-6 lg:mb-10">
+            <p className="text-xs lg:text-sm uppercase tracking-[0.25em] text-[#C6A136] font-medium mb-2">
+              Testimonials
+            </p>
+            <h2 className="text-[1.3rem] lg:text-[1.8rem] font-display font-bold text-[#1B2C4B]">
+              What Our Guests Say
+            </h2>
+          </div>
+
+          {/* Elfsight Google Reviews Widget */}
+          <div className="elfsight-app-2372d759-c7f5-44fa-928a-488576eb7f7f" data-elfsight-app-lazy></div>
+        </motion.div>
+
+        {/* Gold divider */}
+        <div className="border-t border-[#C6A136]/20 mt-10 lg:mt-16" />
       </div>
     </section>
   );
