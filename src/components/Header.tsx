@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [{
@@ -101,19 +101,36 @@ export const Header = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
+            <a
+              href="tel:+35799127455"
+              className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors duration-200"
+              aria-label="Call us"
+            >
+              <Phone className="h-5 w-5 drop-shadow-[0_1px_2px_rgba(198,161,54,0.4)]" />
+              <span className="text-base font-medium">Call Us</span>
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setIsOpen(!isOpen)} 
-            className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" 
-            aria-label="Toggle menu"
-          >
-            {isOpen 
-              ? <X className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} /> 
-              : <Menu className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} />
-            }
-          </button>
+          {/* Mobile: Call + Menu buttons */}
+          <div className="flex md:hidden items-center gap-1">
+            <a
+              href="tel:+35799127455"
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Call us"
+            >
+              <Phone className="h-5 w-5 text-primary drop-shadow-[0_1px_2px_rgba(198,161,54,0.4)]" />
+            </a>
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center" 
+              aria-label="Toggle menu"
+            >
+              {isOpen 
+                ? <X className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} /> 
+                : <Menu className={`h-6 w-6 transition-all duration-[180ms] ${isDarkBg ? 'text-[#F5F1E6]' : 'text-[#1B2C4B]'}`} />
+              }
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
