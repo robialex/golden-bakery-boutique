@@ -50,35 +50,28 @@ const GoogleGLogo = () => (
 );
 
 const ReviewCard = ({ review, index }: { review: typeof reviews[0]; index: number }) => (
-  <motion.a
-    href={review.url}
-    target="_blank"
-    rel="noopener noreferrer"
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="block bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 lg:p-6 relative group
+    onClick={() => window.open(review.url, '_blank', 'noopener,noreferrer')}
+    className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 lg:p-6 relative group
                hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,161,54,0.15)] transition-all duration-300 cursor-pointer"
   >
-    {/* Stars */}
     <div className="flex gap-0.5 mb-3">
       {[...Array(5)].map((_, i) => (
         <Star key={i} className="h-4 w-4 fill-[#C6A136] text-[#C6A136]" />
       ))}
     </div>
-
-    {/* Review text */}
     <p className="text-sm lg:text-[15px] text-white/75 leading-relaxed mb-4">
       "{review.text}"
     </p>
-
-    {/* Bottom: name + Google logo */}
     <div className="flex items-center justify-between">
       <span className="text-sm font-semibold text-white/90">{review.name}</span>
       <GoogleGLogo />
     </div>
-  </motion.a>
+  </motion.div>
 );
 
 export const CustomerReviews = () => {
@@ -153,11 +146,9 @@ export const CustomerReviews = () => {
           >
             {reviews.map((review, index) => (
               <div key={review.name} className="snap-center shrink-0 w-[85vw] max-w-[320px]">
-                <a
-                  href={review.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full"
+                <div
+                  onClick={() => window.open(review.url, '_blank', 'noopener,noreferrer')}
+                  className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full cursor-pointer"
                 >
                   <div className="flex gap-0.5 mb-3">
                     {[...Array(5)].map((_, i) => (
@@ -171,7 +162,7 @@ export const CustomerReviews = () => {
                     <span className="text-sm font-semibold text-white/90">{review.name}</span>
                     <GoogleGLogo />
                   </div>
-                </a>
+                </div>
               </div>
             ))}
           </div>
