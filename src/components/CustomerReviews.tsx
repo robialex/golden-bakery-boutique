@@ -50,105 +50,38 @@ const GoogleGLogo = () => (
 );
 
 const ReviewCard = ({ review, index }: { review: typeof reviews[0]; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
-    onClick={() => window.open(review.url, '_blank', 'noopener,noreferrer')}
-    className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 lg:p-6 relative group
-               hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,161,54,0.15)] transition-all duration-300 cursor-pointer"
-  >
-    <div className="flex gap-0.5 mb-3">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} className="h-4 w-4 fill-[#C6A136] text-[#C6A136]" />
-      ))}
-    </div>
-    <p className="text-sm lg:text-[15px] text-white/75 leading-relaxed mb-4">
-      "{review.text}"
-    </p>
-    <div className="flex items-center justify-between">
-      <span className="text-sm font-semibold text-white/90">{review.name}</span>
-      <GoogleGLogo />
-    </div>
-  </motion.div>
+  <a href={review.url} target="_blank" rel="noopener noreferrer" className="block">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 lg:p-6 relative group
+                 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(198,161,54,0.15)] transition-all duration-300 cursor-pointer"
+    >
+      <div className="flex gap-0.5 mb-3">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="h-4 w-4 fill-[#C6A136] text-[#C6A136]" />
+        ))}
+      </div>
+      <p className="text-sm lg:text-[15px] text-white/75 leading-relaxed mb-4">
+        "{review.text}"
+      </p>
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-semibold text-white/90">{review.name}</span>
+        <GoogleGLogo />
+      </div>
+    </motion.div>
+  </a>
 );
-
-export const CustomerReviews = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const totalSlides = reviews.length;
-
-  const scrollToSlide = (index: number) => {
-    const clamped = Math.max(0, Math.min(index, totalSlides - 1));
-    setCurrentSlide(clamped);
-    if (scrollRef.current) {
-      const cardWidth = scrollRef.current.scrollWidth / totalSlides;
-      scrollRef.current.scrollTo({ left: cardWidth * clamped, behavior: 'smooth' });
-    }
-  };
-
-  // Sync scroll position with currentSlide on touch swipe
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    let timeout: ReturnType<typeof setTimeout>;
-    const onScroll = () => {
-      clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        const cardWidth = el.scrollWidth / totalSlides;
-        const newIndex = Math.round(el.scrollLeft / cardWidth);
-        setCurrentSlide(Math.max(0, Math.min(newIndex, totalSlides - 1)));
-      }, 100);
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, [totalSlides]);
-
-  return (
-    <section className="py-14 md:py-20 bg-[#1B2C4B]">
-      <div className="container mx-auto px-4">
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl md:text-4xl font-display font-bold text-center text-[#C6A136] mb-2"
-        >
-          What Our Guests Say
-        </motion.h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="flex justify-center gap-0.5 mb-8 md:mb-12"
-        >
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-5 w-5 fill-[#C6A136] text-[#C6A136]" />
-          ))}
-        </motion.div>
-
-        {/* Desktop: 3-column grid */}
-        <div className="hidden md:grid md:grid-cols-3 gap-5 lg:gap-6">
-          {reviews.map((review, index) => (
-            <ReviewCard key={review.name} review={review} index={index} />
-          ))}
-        </div>
-
-        {/* Mobile: Horizontal swipeable carousel */}
-        <div className="md:hidden">
-          <div
-            ref={scrollRef}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-2"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
-          >
-            {reviews.map((review, index) => (
+...
+            {reviews.map((review) => (
               <div key={review.name} className="snap-center shrink-0 w-[85vw] max-w-[320px]">
-                <div
-                  onClick={() => window.open(review.url, '_blank', 'noopener,noreferrer')}
-                  className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full cursor-pointer"
+                <a
+                  href={review.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full cursor-pointer"
                 >
                   <div className="flex gap-0.5 mb-3">
                     {[...Array(5)].map((_, i) => (
@@ -162,7 +95,7 @@ export const CustomerReviews = () => {
                     <span className="text-sm font-semibold text-white/90">{review.name}</span>
                     <GoogleGLogo />
                   </div>
-                </div>
+                </a>
               </div>
             ))}
           </div>
