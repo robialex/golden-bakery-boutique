@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import { EdgeToEdgeShowcase } from '@/components/EdgeToEdgeShowcase';
+import { CustomerReviews } from '@/components/CustomerReviews';
 import { VisitUs } from '@/components/VisitUs';
 import { motion } from 'framer-motion';
 
