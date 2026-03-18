@@ -146,11 +146,9 @@ export const CustomerReviews = () => {
           >
             {reviews.map((review, index) => (
               <div key={review.name} className="snap-center shrink-0 w-[85vw] max-w-[320px]">
-                <a
-                  href={review.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full"
+                <div
+                  onClick={() => window.open(review.url, '_blank', 'noopener,noreferrer')}
+                  className="bg-[#162438] border border-[#C6A136]/15 rounded-xl p-5 relative h-full cursor-pointer"
                 >
                   <div className="flex gap-0.5 mb-3">
                     {[...Array(5)].map((_, i) => (
@@ -164,7 +162,7 @@ export const CustomerReviews = () => {
                     <span className="text-sm font-semibold text-white/90">{review.name}</span>
                     <GoogleGLogo />
                   </div>
-                </a>
+                </div>
               </div>
             ))}
           </div>
