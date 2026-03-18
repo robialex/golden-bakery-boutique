@@ -1,5 +1,6 @@
 import Hero from '@/components/Hero';
 import { EdgeToEdgeShowcase } from '@/components/EdgeToEdgeShowcase';
+import { CustomerReviews } from '@/components/CustomerReviews';
 import { VisitUs } from '@/components/VisitUs';
 import { motion } from 'framer-motion';
 
@@ -16,6 +17,15 @@ const Home = () => {
         transition={{ duration: 0.6 }}
       >
         <EdgeToEdgeShowcase />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6 }}
+      >
+        <CustomerReviews />
       </motion.div>
       
       <motion.div
